@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import Layout from './layout';
+import Announcements from "./announcements/announcements";
+import './home.scss';
 
 const Home = () => (
     <Layout>
@@ -8,6 +10,7 @@ const Home = () => (
           <div className="text-center">
             <h1 className="mt-5 mb-3">Welcome to Title</h1>
             <h3>Subtitle</h3>
+            <Announcements />
           </div>
         </div>
     </Layout>
