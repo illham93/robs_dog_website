@@ -32,6 +32,7 @@ const Layout = (props) => {
                     </div>
                 </div>
             </nav>
+            {props.children}
         </React.Fragment>
     );
 }

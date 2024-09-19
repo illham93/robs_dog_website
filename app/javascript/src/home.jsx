@@ -4,7 +4,12 @@ import Layout from './layout';
 
 const Home = () => (
     <Layout>
-        <h1>Home page</h1>
+        <div className="container">
+          <div className="text-center">
+            <h1 className="mt-5 mb-3">Welcome to Title</h1>
+            <h3>Subtitle</h3>
+          </div>
+        </div>
     </Layout>
 )
 
