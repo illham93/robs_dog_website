@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     
+    post '/sessions' => 'sessions#create'
+    delete '/sessions' => 'sessions#destroy'
     get '/authenticated' => 'sessions#authenticated'
+
+    post '/users' => 'users#create'
   end
 end
