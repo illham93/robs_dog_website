@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :sessions
   
-  validates :email, presence: true, {minimum: 5, maximum: 100}
+  validates :email, presence: true, length: {minimum: 5, maximum: 100}
 
   validates_uniqueness_of :email
 
