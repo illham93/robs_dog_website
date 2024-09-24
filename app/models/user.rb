@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   after_validation :hash_password
 
+  def admin?
+    self.admin
+  end
+
   private 
 
   def hash_password
