@@ -40,9 +40,9 @@ class LoginWidget extends React.Component {
             })
             .catch(error => {
                 this.setState({
-                    error: 'Could not log in.',
-                })
-            })
+                    error: error.error || 'Could not log in',
+                });
+            });
     }
 
     render () {

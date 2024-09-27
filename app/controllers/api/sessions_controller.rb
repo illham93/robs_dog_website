@@ -12,7 +12,7 @@ module Api
 
         render 'api/sessions/create', status: :created
       else
-        render json: {success: false}, status: :bad_request
+        render json: { error: 'Email and password do not match' }, status: :unprocessable_entity
       end
     end
 

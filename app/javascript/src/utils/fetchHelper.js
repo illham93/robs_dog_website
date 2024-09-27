@@ -49,8 +49,8 @@ export function jsonHeader(options = {}) {
 
   export function handleErrors(response) {
     if (!response.ok) {
-      return response.json().then(error => {
-        throw { message: response.statusText, errors: error.errors || [] };
+      return response.json().then((errorData) => {
+        throw errorData;
       });
     }
     return response.json();
