@@ -49,7 +49,9 @@ export function jsonHeader(options = {}) {
 
   export function handleErrors(response) {
     if (!response.ok) {
-      throw Error(response.statusText);
+      return response.json().then(error => {
+        throw { message: response.statusText, errors: error.errors || [] };
+      });
     }
     return response.json();
   }

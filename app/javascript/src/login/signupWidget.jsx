@@ -37,10 +37,17 @@ class SignupWidget extends React.Component {
                 }
             })
             .catch(error => {
-                this.setState({
-                    error: 'Could not sign up.',
-                })
-            })
+                console.log(error);
+                if (error.errors && error.errors.length > 0) {
+                    this.setState({
+                        error: error.errors.join(', ')
+                    });
+                } else {
+                    this.setState({
+                        error: 'Could not sign up.',
+                    });
+                }
+            });
     }
 
     login = (e) => {
@@ -82,6 +89,7 @@ class SignupWidget extends React.Component {
                     <input name="password" type="password" className="form-control form-control-lg mb-3" placeholder="Password" value={password} onChange={this.handleChange} required />
                     <button type="submit" className="btn btn-primary btn-block btn-lg">Sign Up</button>
                 </form>
+                {error && <div className="alert alert-danger mt-3">{error}</div>}
                 <hr/>
                 <p className="mb-0">Already have an account? <a className="text-primary" onClick={this.props.toggle}>Log in</a></p>
             </React.Fragment>

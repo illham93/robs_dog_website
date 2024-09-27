@@ -34,7 +34,7 @@ module Api
 
       if session&.destroy
         cookies.delete(:session_token)
-        redirect_to root_path
+        render json: { success: true }, status: :ok
       else
         render json: {success: false}, status: :unproccesable_entity
       end
