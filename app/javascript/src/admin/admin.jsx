@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../layout";
 import { safeCredentials, handleErrors } from "../utils/fetchHelper";
+import EditAnnouncements from "./editAnnouncements";
 
 import './admin.scss';
 
@@ -34,7 +35,10 @@ class Admin extends React.Component {
         return (
             <Layout>
                 {admin ? (
-                    <h3>Admin</h3>
+                    <>
+                        <h1 className="text-center m-5">Admin</h1>
+                        <EditAnnouncements />
+                    </>
                 ) : (
                     <h3 className="text-center mt-5">You are not authorized to be here</h3>
                 )}

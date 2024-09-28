@@ -22,9 +22,9 @@ module Api
 
       if session
         @user = session.user
-        render 'api/sessions/authenticated', status: :ok, locals: { admin: @user.admin? }
+        render 'api/sessions/authenticated', status: :ok, locals: { admin: @user.admin? }, status: :ok
       else
-        render json: {authenticated: false}, status: :bad_request
+        render json: {authenticated: false}, status: :unauthorized
       end
     end
 

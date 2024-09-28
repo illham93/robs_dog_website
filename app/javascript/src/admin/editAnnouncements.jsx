@@ -1,9 +1,8 @@
 import React from "react";
-import Layout from 'src/layout';
-import './announcements.scss';
-import { handleErrors } from '../utils/fetchHelper.js';
+import { handleErrors, safeCredentials } from "../utils/fetchHelper";
+import Announcements from "../announcements/announcements";
 
-class Announcements extends React.Component {
+class EditAnnouncements extends React.Component {
 
     state = {
         announcements: [],
@@ -29,6 +28,26 @@ class Announcements extends React.Component {
             });
     }
 
+    delete(id) {
+        fetch(`/api/announcements/${id}`, safeCredentials({
+            method: 'DELETE',
+        }))
+        .then(handleErrors)
+        .then(data => {
+            if (data.success) {
+                this.setState(prevState => ({
+                    announcements: prevState.announcements.filter(announcement => announcement.id !== id)
+                }))
+                console.log(data);
+            }
+        })
+        .catch(error => {
+            this.setState({
+                error: error.error || 'Could not delete announcement'
+            });
+        });
+    }
+
     render () {
         const { announcements, error, loading } = this.state;
 
@@ -41,15 +60,16 @@ class Announcements extends React.Component {
                 {error ? (
                     <h3>{error}</h3>
                 ) : (
-                    <div className="row">
+                    <div>
                         {announcements.map(announcement => {
                             return (
-                                <div className="col-12 col-lg-6 mb-4 d-flex justify-content-center" key={announcement.id}>
-                                    <div className="rounded announcement text-shadow p-3" style={{ width: '100%' }}>
+                                <form onSubmit={this.handleSubmit} key={announcement.id}>
+                                    <div className="admin-announcement rounded p-3 mb-3 position-relative" >
+                                        <button className="btn btn-danger position-absolute m-2 top-0 end-0" onClick={() => this.delete(announcement.id)}>X</button>
                                         <h3>{announcement.title}</h3>
                                         <p>{announcement.content}</p>
                                     </div>
-                                </div>
+                                </form>
                             )
                         })}
                     </div>
@@ -59,4 +79,4 @@ class Announcements extends React.Component {
     }
 }
 
-export default Announcements;
+export default EditAnnouncements;
