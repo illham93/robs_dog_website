@@ -22,7 +22,7 @@ module Api
 
       if session
         @user = session.user
-        render 'api/sessions/authenticated', status: :ok
+        render 'api/sessions/authenticated', status: :ok, locals: { admin: @user.admin? }
       else
         render json: {authenticated: false}, status: :bad_request
       end

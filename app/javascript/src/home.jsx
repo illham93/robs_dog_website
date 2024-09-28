@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 import Layout from './layout';
 import Announcements from "./announcements/announcements";
 import './home.scss';
@@ -14,9 +14,7 @@ const Home = () => (
     </Layout>
 )
 
-document.addEventListener('DOMContentLoaded', () => {
-    ReactDOM.render(
-      <Home />,
-      document.body.appendChild(document.createElement('div')),
-    )
-  })
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render (<Home />);

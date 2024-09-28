@@ -4,6 +4,7 @@ import './layout.scss';
 const Layout = (props) => {
 
     const [loggedIn, setLoggedIn] = useState(false);
+    const [admin, setAdmin] = useState(false);
     const [authenticityToken, setAuthenticityToken] = useState('');
 
     useEffect(() => {
@@ -21,6 +22,9 @@ const Layout = (props) => {
             .then(data => {
                 if (data.authenticated) {
                     setLoggedIn(true);
+                    if (data.admin) {
+                        setAdmin(true);
+                    }
                 }
             })
             .catch(error => {
@@ -72,6 +76,11 @@ const Layout = (props) => {
                             </li>
                         </ul>
                         <ul className="navbar-nav ms-auto">
+                            {admin && (
+                                <li className="nav-item">
+                                    <a className="nav-link text-white" href="/admin">Admin</a>
+                                </li>
+                            )}
                             <li className="nav-item">
                                 {loggedIn ? (
                                     <button onClick={logOut} className="nav-link text-white">Log Out</button>
