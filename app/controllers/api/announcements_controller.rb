@@ -12,12 +12,16 @@ module Api
     end
 
     def destroy
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
       announcement = Announcement.find(params[:id])
       if announcement
         announcement.destroy
         render json: {success: true}
       else
-        render json: {error: "Announcment not found"}, status: :not_found
+        render json: {error: "Announcement not found"}, status: :not_found
       end
     end
 
