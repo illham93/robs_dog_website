@@ -2,3 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+#home-subtitle {
+    padding-bottom: 200px;
+}
+
+#home-title {
+    padding-top: 200px;
+    font-size: 36pt;
+}
+
+#home-welcome {
+    background-image: url('../images/home-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

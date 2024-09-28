@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import './layout.scss';
 
 const Layout = (props) => {
 
@@ -50,33 +51,32 @@ const Layout = (props) => {
 
     return (
         <React.Fragment>
-            <nav className="navbar navbar-expand navbar-light bg-light">
+            <nav className="navbar navbar-expand" id="navbar">
                 <div className="container">
-                    <a className="navbar-brand text-primary" href="/">Title</a>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Home</a>
+                                <a className="nav-link text-white" href="/">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Member Spotlight</a>
+                                <a className="nav-link text-white" href="/">Member Spotlight</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Hall of Fame</a>
+                                <a className="nav-link text-white" href="/">Hall of Fame</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Events</a>
+                                <a className="nav-link text-white" href="/">Events</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Merch</a>
+                                <a className="nav-link text-white" href="/">Merch</a>
                             </li>
                         </ul>
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
                                 {loggedIn ? (
-                                    <button onClick={logOut} className="nav-link text-primary">Log Out</button>
+                                    <button onClick={logOut} className="nav-link text-white">Log Out</button>
                                 ) : (
-                                    <a className="nav-link text-primary" href="/login">Log In</a>
+                                    <a className="nav-link text-white" href="/login">Log In</a>
                                 )}
                             </li>
                         </ul>
