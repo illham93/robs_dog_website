@@ -39,7 +39,7 @@ class Announcements extends React.Component {
                 {loading && <h3>Loading...</h3>}
 
                 {error ? (
-                    <h3>{error}</h3>
+                    <h3 className="text-danger mt-2">{error}</h3>
                 ) : (
                     <div className="row">
                         {announcements.map(announcement => {

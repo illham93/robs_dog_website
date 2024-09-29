@@ -29,23 +29,25 @@ class EditAnnouncements extends React.Component {
     }
 
     delete(id) {
-        fetch(`/api/announcements/${id}`, safeCredentials({
-            method: 'DELETE',
-        }))
-        .then(handleErrors)
-        .then(data => {
-            if (data.success) {
-                this.setState(prevState => ({
-                    announcements: prevState.announcements.filter(announcement => announcement.id !== id)
-                }))
-                console.log(data);
-            }
-        })
-        .catch(error => {
-            this.setState({
-                error: error.error || 'Could not delete announcement'
+        if (confirm('Are you sure you want to delete this announcement?')) {
+            fetch(`/api/announcements/${id}`, safeCredentials({
+                method: 'DELETE',
+            }))
+            .then(handleErrors)
+            .then(data => {
+                if (data.success) {
+                    this.setState(prevState => ({
+                        announcements: prevState.announcements.filter(announcement => announcement.id !== id)
+                    }))
+                    console.log(data);
+                }
+            })
+            .catch(error => {
+                this.setState({
+                    error: error.error || 'Could not delete announcement'
+                });
             });
-        });
+        };
     }
 
     render () {
@@ -58,14 +60,17 @@ class EditAnnouncements extends React.Component {
                 {loading && <h3>Loading...</h3>}
 
                 {error ? (
-                    <h3>{error}</h3>
+                    <h3 className="text-danger mt-2">{error}</h3>
                 ) : (
                     <div>
                         {announcements.map(announcement => {
                             return (
-                                <form onSubmit={this.handleSubmit} key={announcement.id}>
+                                <form onSubmit={this.submit} key={announcement.id}>
                                     <div className="admin-announcement rounded p-3 mb-3 position-relative" >
-                                        <button className="btn btn-danger position-absolute m-2 top-0 end-0" onClick={() => this.delete(announcement.id)}>X</button>
+                                        <div className="button-group position-absolute m-2 top-0 end-0 d-flex">
+                                            <button className="btn btn-primary me-2 flex-grow-1"><i class="fa-solid fa-pencil"></i></button>
+                                            <button className="btn btn-danger flex-grow-1" onClick={() => this.delete(announcement.id)}><i class="fa-solid fa-trash-can"></i></button> 
+                                        </div>
                                         <h3>{announcement.title}</h3>
                                         <p>{announcement.content}</p>
                                     </div>
