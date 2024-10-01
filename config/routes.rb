@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     #announcements
     get '/announcements' => 'announcements#index'
     delete '/announcements/:id' => 'announcements#destroy'
+    put 'announcements/:id' => 'announcements#update'
 
     post '/users' => 'users#create'
   end
