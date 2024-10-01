@@ -1,6 +1,9 @@
 {
   "name": "robs-dog-website",
   "private": true,
+  "engines": {
+    "node": "^16.17"
+  },
   "dependencies": {
     "@babel/preset-react": "^7.24.7",
     "@popperjs/core": "^2.11.8",
