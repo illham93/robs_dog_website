@@ -1,5 +1,5 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from 'react-dom';
 import Layout from './layout';
 import Announcements from "./announcements/announcements";
 import './home.scss';
@@ -14,7 +14,11 @@ const Home = () => (
     </Layout>
 )
 
-const container = document.getElementById('root');
-const root = createRoot(container);
+document.addEventListener('DOMContentLoaded', () => {
+  const userProperties = document.body.getAttribute('data-user-properties') === 'true';
 
-root.render (<Home />);
+  ReactDOM.render(
+    <Home userProperties={userProperties} />,
+    document.body.appendChild(document.createElement('div')),
+  )
+})
