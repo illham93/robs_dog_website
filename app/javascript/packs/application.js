@@ -8,7 +8,7 @@ import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 // import "channels"
 // import 'bootstrap'
-import '../../assets/stylesheets/application.css';
+// import '../../assets/stylesheets/application.css';
 
 Rails.start()
 // Turbolinks.start()
