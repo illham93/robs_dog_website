@@ -87,7 +87,8 @@ class EditAnnouncements extends React.Component {
         })
     }
 
-    delete(id) {
+    delete(e, id) {
+        e.preventDefault();
         if (confirm('Are you sure you want to delete this announcement?')) {
             fetch(`/api/announcements/${id}`, safeCredentials({
                 method: 'DELETE',
@@ -139,7 +140,7 @@ class EditAnnouncements extends React.Component {
                                                     <button className="btn btn-success me-2" type="submit">
                                                         <i className="fa-regular fa-floppy-disk"></i>
                                                     </button>
-                                                    <button className="btn btn-danger" onClick={() => this.delete(announcement.id)}>
+                                                    <button className="btn btn-danger" onClick={(e) => this.delete(e, announcement.id)}>
                                                         <i className="fa-solid fa-trash-can"></i>
                                                     </button> 
                                                 </div>
@@ -157,7 +158,7 @@ class EditAnnouncements extends React.Component {
                                                     <button className="btn btn-primary me-2" onClick={(e) => this.edit(e, announcement.id)}>
                                                         <i className="fa-solid fa-pencil"></i>
                                                     </button>
-                                                    <button className="btn btn-danger" onClick={() => this.delete(announcement.id)}>
+                                                    <button className="btn btn-danger" onClick={(e) => this.delete(e, announcement.id)}>
                                                         <i className="fa-solid fa-trash-can"></i>
                                                     </button> 
                                                 </div>
