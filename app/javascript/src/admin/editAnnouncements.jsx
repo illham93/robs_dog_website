@@ -180,7 +180,7 @@ class EditAnnouncements extends React.Component {
                                         placeholder="Title"
                                     />
                                     <button className="btn btn-success me-2" type="submit">
-                                        <i class="fa-solid fa-check"></i>
+                                        <i className="fa-solid fa-check"></i>
                                     </button>
                                 </div>
                                 <textarea 

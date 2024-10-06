@@ -1,6 +1,6 @@
 module Api
   class AnnouncementsController < ApplicationController
-    before_action :authenticate_user!, only: [:destroy, :update]
+    before_action :authenticate_user!, only: [:create, :destroy, :update]
 
     def index
       @announcements = Announcement.order(created_at: :desc)
@@ -8,6 +8,19 @@ module Api
         render json: {announcements: @announcements}, status: :ok
       else
         render json: { error: 'announcements not found' }, status: :not_found
+      end
+    end
+
+    def create
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      @announcement = Announcement.new(announcement_params)
+      if @announcement.save
+        render json: {success: true}
+      else
+        render json: {error: "Error creating announcement"}, status: :unprocessable_entity
       end
     end
 
