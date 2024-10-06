@@ -3,17 +3,39 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 #home-subtitle {
-    padding-bottom: 200px;
+    padding-bottom: 20px;
 }
 
 #home-title {
-    padding-top: 200px;
+    padding-top: 20px;
     font-size: 36pt;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+#home-title-text {
+    background-color: rgba(0, 0, 0, 0.3); /* Darker background for better contrast */
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.4);
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    display: inline-block;
+
+    /* Apply backdrop blur */
+    backdrop-filter: blur(5px); /* Adjust the blur level as needed */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
+    
+    /* Create a soft transition effect */
+    position: relative; /* Allow for pseudo-element positioning */
 }
 
 #home-welcome {
-    background-image: url('../images/home-background.jpg');
+    background-image: url('../images/home-page-background-demo.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    position: relative; /* Set position to relative for child positioning */
 }
