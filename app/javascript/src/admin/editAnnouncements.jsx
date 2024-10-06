@@ -38,6 +38,7 @@ class EditAnnouncements extends React.Component {
             body: JSON.stringify({
                 title: form.get('title'),
                 content: form.get('content'),
+                link: form.get('link'),
             })
         }))
         .then(handleErrors)
@@ -70,6 +71,7 @@ class EditAnnouncements extends React.Component {
             body: JSON.stringify({
                 title: form.get('title'),
                 content: form.get('content'),
+                link: form.get('link'),
             })
         }))
         .then(handleErrors)
@@ -146,10 +148,16 @@ class EditAnnouncements extends React.Component {
                                                 </div>
                                                 <textarea 
                                                     id={`announcement-content-${announcement.id}`} 
-                                                    className="form-control" 
+                                                    className="form-control mb-2" 
                                                     defaultValue={announcement.content} 
                                                     name="content" 
                                                 />
+                                                <input
+                                                    id={`announcement-link-${announcement.id}`}
+                                                    className="form-control"
+                                                    defaultValue={announcement.link}
+                                                    name="link"
+                                                    placeholder="Link (Optional) *Include the full URL that starts with https://" />
                                             </>
                                         ) : (
                                             <>
@@ -179,6 +187,7 @@ class EditAnnouncements extends React.Component {
                                         name="title" 
                                         type="text"
                                         placeholder="Title"
+                                        required
                                     />
                                     <button className="btn btn-success me-2" type="submit">
                                         <i className="fa-solid fa-check"></i>
@@ -186,10 +195,16 @@ class EditAnnouncements extends React.Component {
                                 </div>
                                 <textarea 
                                     id="new-announcement-content"
-                                    className="form-control" 
+                                    className="form-control mb-2" 
                                     name="content" 
                                     placeholder="Content"
+                                    required
                                 />
+                                <input
+                                    id="new-announcement-link"
+                                    className="form-control"
+                                    name="link"
+                                    placeholder="Link (Optional) *Include the full URL that starts with https://" />
                             </div>
                         </form>
                     </div>

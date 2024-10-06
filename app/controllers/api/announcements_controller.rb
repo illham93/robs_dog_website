@@ -54,7 +54,7 @@ module Api
     private
 
     def announcement_params
-      params.require(:announcement).permit(:title, :content)
+      params.require(:announcement).permit(:title, :content, :link)
     end
 
   end

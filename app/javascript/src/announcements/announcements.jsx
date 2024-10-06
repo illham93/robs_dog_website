@@ -45,13 +45,15 @@ class Announcements extends React.Component {
                         {announcements.map(announcement => {
                             const dateTime = new Date(announcement.created_at);
                             const date = dateTime.toLocaleDateString();
-                            return (
-                                <div className="col-12 col-lg-6 mb-4 d-flex justify-content-center" key={announcement.id}>
-                                    <div className="rounded announcement text-shadow p-3" style={{ width: '100%' }}>
-                                        <h3>{announcement.title}</h3>
-                                        <h5>{date}</h5>
-                                        <p>{announcement.content}</p>
-                                    </div>
+                            return (   
+                                <div className="col-12 col-lg-6 mb-4 d-flex justify-content-center" key={announcement.id}>      
+                                    <a href={announcement.link} className="text-decoration-none text-white d-flex w-100 h-100" target="_blank" rel="noopener noreferrer">                           
+                                        <div className="rounded announcement text-shadow p-3" style={{ width: '100%' }}>                                       
+                                            <h3>{announcement.title}</h3>
+                                            <h5>{date}</h5>
+                                            <p>{announcement.content}</p>                                        
+                                        </div>
+                                    </a>
                                 </div>
                             )
                         })}
