@@ -29,6 +29,32 @@ class EditAnnouncements extends React.Component {
             });
     }
 
+    create(e) {
+        e.preventDefault();
+        const form = new FormData(e.target);
+        fetch('/api/announcements', safeCredentials({
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: form.get('title'),
+                content: form.get('content'),
+            })
+        }))
+        .then(handleErrors)
+        .then(data => {
+            if (data.success) {
+                window.location.reload();
+                console.log('Announcement added successfully', data);
+            } else {
+                console.error('Error adding announcement', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            this.setState({ error: error.error || 'Error adding announcement'});
+        })
+    }
+
     edit(e, id) {
         e.preventDefault();
         this.setState({ editId: id });
@@ -142,6 +168,29 @@ class EditAnnouncements extends React.Component {
                                 </form>
                             )
                         })}
+                        <h5>Add new announcement:</h5>
+                        <form onSubmit={(e) => this.create(e)}>
+                            <div className="admin-announcement rounded p-3 mb-3 position-relative" >
+                                <div className="d-flex align-items-center justify-content-between mb-2">
+                                    <input 
+                                        id="new-announcement-title"
+                                        className="form-control flex-grow-1 me-2 edit-announcement-title" 
+                                        name="title" 
+                                        type="text"
+                                        placeholder="Title"
+                                    />
+                                    <button className="btn btn-success me-2" type="submit">
+                                        <i class="fa-solid fa-check"></i>
+                                    </button>
+                                </div>
+                                <textarea 
+                                    id="new-announcement-content"
+                                    className="form-control" 
+                                    name="content" 
+                                    placeholder="Content"
+                                />
+                            </div>
+                        </form>
                     </div>
                 )}
             </div>
