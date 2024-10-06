@@ -138,6 +138,7 @@ class EditAnnouncements extends React.Component {
                                                         defaultValue={announcement.title} 
                                                         name="title" 
                                                         type="text" 
+                                                        required
                                                     />
                                                     <button className="btn btn-success me-2" type="submit">
                                                         <i className="fa-regular fa-floppy-disk"></i>
@@ -151,6 +152,7 @@ class EditAnnouncements extends React.Component {
                                                     className="form-control mb-2" 
                                                     defaultValue={announcement.content} 
                                                     name="content" 
+                                                    required
                                                 />
                                                 <input
                                                     id={`announcement-link-${announcement.id}`}
