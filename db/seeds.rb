@@ -11,3 +11,14 @@ announcements = Announcement.create([
   { title: 'Announcement 2', content: "This is another announcement. Last month's event was a big success. Click here to read more." },
   { title: 'Announcement 3', content: "This is a final announcement. Euchre is the best dog ever." },
 ])
+
+dogOfTheMonth = DogOfTheMonth.create([
+  { 
+    call_name: 'Euchre',
+    registered_name: 'Euchre',
+    about: 'Euchre is the best dog ever',
+    titles: 'Euchre has won every title ever',
+    owner: 'Bob Ronico',
+    image_url: '',
+  }
+])

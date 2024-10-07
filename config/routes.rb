@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     put 'announcements/:id' => 'announcements#update'
     delete '/announcements/:id' => 'announcements#destroy'
 
+    #dog of the month
+    get '/dog-of-the-month' => 'dog_of_the_month#index'
+
     post '/users' => 'users#create'
   end
 end
