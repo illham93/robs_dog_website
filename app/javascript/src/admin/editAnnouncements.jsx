@@ -1,6 +1,6 @@
 import React from "react";
 import { handleErrors, safeCredentials } from "../utils/fetchHelper";
-import Announcements from "../announcements/announcements";
+import Announcements from "../home/announcements";
 
 class EditAnnouncements extends React.Component {
 

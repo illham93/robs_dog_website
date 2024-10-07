@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import Layout from './layout';
-import Announcements from "./announcements/announcements";
+import Announcements from "./home/announcements";
 import './home.scss';
 
 const Home = () => (

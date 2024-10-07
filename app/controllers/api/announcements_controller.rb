@@ -16,8 +16,6 @@ module Api
         return render json: {error: 'Unauthorized'}, status: :forbidden
       end
 
-      Rails.logger.debug "Incoming params: #{params.inspect}"
-
       @announcement = Announcement.new(announcement_params)
       if @announcement.save
         render json: {success: true}
