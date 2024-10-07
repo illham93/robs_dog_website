@@ -1,5 +1,4 @@
 import React from "react";
-import Layout from 'src/layout';
 import './announcements.scss';
 import { handleErrors } from '../utils/fetchHelper.js';
 
@@ -39,7 +38,7 @@ class Announcements extends React.Component {
                 {loading && <h3>Loading...</h3>}
 
                 {error ? (
-                    <h3 className="text-danger mt-2">{error}</h3>
+                    <h3 className="text-danger mt-2">Error: {error}</h3>
                 ) : (
                     <div className="row">
                         {announcements.map(announcement => {

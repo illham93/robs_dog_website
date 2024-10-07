@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Layout from './layout';
 import Announcements from "./home/announcements";
 import './home.scss';
+import DogOfTheMonth from "./home/dogOfTheMonth";
 
 const Home = () => (
     <Layout>
@@ -13,6 +14,7 @@ const Home = () => (
           </div>
       </div>
       <Announcements />
+      <DogOfTheMonth />
     </Layout>
 )
 
