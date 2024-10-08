@@ -13,6 +13,17 @@
     max-width: 500px;
 }
 
+.dog-of-the-month-image {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
+    display: block;
+    margin: 20px auto 20px;
+}
+
 .edit-announcement-title {
     max-width: calc(100% - 100px);
 }

@@ -97,8 +97,8 @@ class EditDogOfTheMonth extends React.Component {
                                         <i className="fa-solid fa-pencil"></i>
                                     </button>
                                 </div>
-                                <img src={dog.image_url}></img>
                                 <h3 className="text-center">{dog.call_name}</h3>
+                                <img className="dog-of-the-month-image" src={dog.image_url}></img>
                                 <h5>Registered name: {dog.registered_name}</h5>
                                 <h5>Titles: {dog.titles}</h5>
                                 <h5>Owner: {dog.owner}</h5>
