@@ -19,6 +19,5 @@ dogOfTheMonth = DogOfTheMonth.create([
     about: 'Euchre is the best dog ever',
     titles: 'Euchre has won every title ever',
     owner: 'Bob Ronico',
-    image_url: '',
   }
 ])
