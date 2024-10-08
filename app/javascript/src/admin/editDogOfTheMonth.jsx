@@ -1,5 +1,5 @@
 import React from "react";
-import { handleErrors, safeCredentials } from "../utils/fetchHelper";
+import { handleErrors, safeCredentials, safeCredentialsFormData } from "../utils/fetchHelper";
 
 class EditDogOfTheMonth extends React.Component {
 
@@ -34,12 +34,16 @@ class EditDogOfTheMonth extends React.Component {
 
     save = (e) => {
         e.preventDefault();
-        const form = new FormData(e.target);
+        const formData = new FormData(e.target);
+        const image = document.getElementById('image-select').files[0];
 
-        fetch(`/api/dog-of-the-month`, safeCredentials({
+        if (image) {
+            formData.append('image', image);
+        }
+
+        fetch(`/api/dog-of-the-month`, safeCredentialsFormData({
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(form.entries()))
+            body: formData
         }))
         .then(handleErrors)
         .then(data => {
@@ -72,12 +76,13 @@ class EditDogOfTheMonth extends React.Component {
 
                         {editing ? (
                             <>
-                                <form onSubmit={(e) => this.save(e)}>
+                                <form encType="multipart/form-data" onSubmit={this.save}>
                                     <div className="d-flex justify-content-end">
                                         <button className="btn btn-success" type="submit">
                                             <i className="fa-regular fa-floppy-disk"></i>
                                         </button>
                                     </div>
+                                    <p>Image: <input id="image-select" type="file" name="image" accept="image/*" /></p>
                                     <p>Call name:<input className="form-control" defaultValue={dog.call_name} name="call_name"/></p>
                                     <p>Registered name:<input className="form-control" defaultValue={dog.registered_name} name="registered_name"/></p>
                                     <p>Titles:<input className="form-control" defaultValue={dog.titles} name="titles"/></p>

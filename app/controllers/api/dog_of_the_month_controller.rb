@@ -3,9 +3,12 @@ module Api
     before_action :authenticate_user!, only: [:update]
 
     def index
-      @dog_of_the_month = DogOfTheMonth.first
-      if @dog_of_the_month
-        render json: {dog: @dog_of_the_month}, status: :ok
+      dog = DogOfTheMonth.first
+      if dog
+        image_url = dog.image.attached? ? url_for(dog.image) : nil
+        render json: {
+          dog: dog.as_json.merge(image_url: image_url)
+        }, status: :ok
       else
         render json: {error: 'Dog of the month not found'}, status: :not_found
       end
@@ -17,6 +20,11 @@ module Api
       end
 
       dog = DogOfTheMonth.first
+
+      if params[:image]
+        dog.image.attach(params[:image])
+      end
+
       if dog.update(dog_params)
         render json: {success: true}
       else
@@ -27,7 +35,7 @@ module Api
     private
 
     def dog_params
-      params.require(:dog_of_the_month).permit(:call_name, :registered_name, :titles, :owner, :about, :image_url)
+      params.permit(:call_name, :registered_name, :titles, :owner, :about, :image)
     end
 
   end
