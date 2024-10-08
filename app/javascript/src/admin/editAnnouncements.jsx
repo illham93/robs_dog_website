@@ -190,7 +190,7 @@ class EditAnnouncements extends React.Component {
                                         placeholder="Title"
                                         required
                                     />
-                                    <button className="btn btn-success me-2" type="submit">
+                                    <button className="btn btn-success" type="submit">
                                         <i className="fa-solid fa-check"></i>
                                     </button>
                                 </div>

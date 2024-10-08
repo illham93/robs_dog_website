@@ -32,31 +32,27 @@ class EditDogOfTheMonth extends React.Component {
         this.setState({ editing: true });
     }
 
-    save = (e, id) => {
+    save = (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
 
-        fetch(`/api/announcements/${id}`, safeCredentials({
+        fetch(`/api/dog-of-the-month`, safeCredentials({
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: form.get('title'),
-                content: form.get('content'),
-                link: form.get('link'),
-            })
+            body: JSON.stringify(Object.fromEntries(form.entries()))
         }))
         .then(handleErrors)
         .then(data => {
             if (data.success) {
                 window.location.reload();
-                console.log('announcement updated successfully', data);
+                console.log('Dog of the month updated successfully', data);
             } else {
-                console.error('Error updating announcement', data);
+                console.error('Error updating dog of the month', data);
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            this.setState({ error: error.error || 'Error updating announcement'});
+            this.setState({ error: error.error || 'Error updating dog of the month'});
         })
     }
 
@@ -76,16 +72,18 @@ class EditDogOfTheMonth extends React.Component {
 
                         {editing ? (
                             <>
-                                <div className="d-flex justify-content-end">
-                                    <button className="btn btn-success me-2" type="submit">
-                                        <i className="fa-regular fa-floppy-disk"></i>
-                                    </button>
-                                </div>
-                                <p>Call name:<input className="form-control"/></p>
-                                <p>Registered name:<input className="form-control"/></p>
-                                <p>Titles:<input className="form-control"/></p>
-                                <p>Owner:<input className="form-control"/></p>
-                                <p>About:<textarea className="form-control"/></p>
+                                <form onSubmit={(e) => this.save(e)}>
+                                    <div className="d-flex justify-content-end">
+                                        <button className="btn btn-success" type="submit">
+                                            <i className="fa-regular fa-floppy-disk"></i>
+                                        </button>
+                                    </div>
+                                    <p>Call name:<input className="form-control" defaultValue={dog.call_name} name="call_name"/></p>
+                                    <p>Registered name:<input className="form-control" defaultValue={dog.registered_name} name="registered_name"/></p>
+                                    <p>Titles:<input className="form-control" defaultValue={dog.titles} name="titles"/></p>
+                                    <p>Owner:<input className="form-control" defaultValue={dog.owner} name="owner"/></p>
+                                    <p>About:<textarea className="form-control" defaultValue={dog.about} name="about"/></p>
+                                </form>
                             </>
                         ) : (
                             <>
