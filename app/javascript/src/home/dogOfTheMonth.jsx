@@ -38,7 +38,14 @@ class DogOfTheMonth extends React.Component {
                 {error ? (
                     <h3 className="text-danger mt-2">Error: {error}</h3>
                 ) : (
-                    <p>test</p>
+                    <div className="rounded dog-of-the-month text-shadow mx-auto mb-5">
+                        <img src={dog.image_url}></img>
+                        <h3 className="text-center">{dog.call_name}</h3>
+                        <h5>Registered name: {dog.registered_name}</h5>
+                        <h5>Titles: {dog.titles}</h5>
+                        <h5>Owner: {dog.owner}</h5>
+                        <p>{dog.about}</p>
+                    </div>
                 )}
             </div>
         )

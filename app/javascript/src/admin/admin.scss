@@ -6,6 +6,13 @@
     width: 40px;
 }
 
+.dog-of-the-month {
+    background-color: rgb(60, 60, 60);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    max-width: 500px;
+}
+
 .edit-announcement-title {
     max-width: calc(100% - 100px);
 }

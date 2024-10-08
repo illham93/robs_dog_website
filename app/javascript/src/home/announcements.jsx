@@ -1,5 +1,4 @@
 import React from "react";
-import './announcements.scss';
 import { handleErrors } from '../utils/fetchHelper.js';
 
 class Announcements extends React.Component {

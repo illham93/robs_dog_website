@@ -4,6 +4,7 @@ import { safeCredentials, handleErrors } from "../utils/fetchHelper";
 import EditAnnouncements from "./editAnnouncements";
 
 import './admin.scss';
+import EditDogOfTheMonth from "./editDogOfTheMonth";
 
 class Admin extends React.Component {
 
@@ -38,6 +39,7 @@ class Admin extends React.Component {
                     <>
                         <h1 className="text-center m-5">Admin</h1>
                         <EditAnnouncements />
+                        <EditDogOfTheMonth />
                     </>
                 ) : (
                     <h3 className="text-center mt-5">You are not authorized to be here</h3>
