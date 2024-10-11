@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import Admin from './admin';
+import AdminHome from './adminHome';
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-        <Admin />,
-        document.body.appendChild(document.createElement('div')),
+        <AdminHome />,
+        document.getElementById('admin-home-container')
     )
 })

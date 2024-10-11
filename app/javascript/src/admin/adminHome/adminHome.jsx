@@ -1,12 +1,12 @@
 import React from "react";
-import Layout from "../layout";
-import { safeCredentials, handleErrors } from "../utils/fetchHelper";
+import Layout from "../../layout";
+import { safeCredentials, handleErrors } from "../../utils/fetchHelper";
 import EditAnnouncements from "./editAnnouncements";
 
-import './admin.scss';
+import './adminHome.scss';
 import EditDogOfTheMonth from "./editDogOfTheMonth";
 
-class Admin extends React.Component {
+class AdminHome extends React.Component {
 
     state = {
         admin: false,
@@ -49,4 +49,4 @@ class Admin extends React.Component {
     }
 }
 
-export default Admin;
+export default AdminHome;

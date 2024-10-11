@@ -1,5 +1,5 @@
 import React from "react";
-import { handleErrors, safeCredentials, safeCredentialsFormData } from "../utils/fetchHelper";
+import { handleErrors, safeCredentials, safeCredentialsFormData } from "../../utils/fetchHelper";
 
 class EditDogOfTheMonth extends React.Component {
 

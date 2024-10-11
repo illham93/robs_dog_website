@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root to: "static_pages#home"
 
   get '/login' => 'static_pages#login'
-  get '/admin' => 'static_pages#admin'
+  
+  # Admin
+  get '/admin/home' => 'static_pages#admin_home'
+  get '/admin/members' => 'static_pages#admin_members'
 
   namespace :api do
     #sessions

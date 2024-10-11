@@ -77,8 +77,12 @@ const Layout = (props) => {
                         </ul>
                         <ul className="navbar-nav ms-auto">
                             {admin && (
-                                <li className="nav-item">
-                                    <a className="nav-link text-white" href="/admin">Admin</a>
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                                    <div className="dropdown-menu" aria-labelledby="adminDropdown">
+                                        <a className="dropdown-item" href="/admin/home">Home</a>
+                                        <a className="dropdown-item" href="/admin/members">Members</a>
+                                    </div>
                                 </li>
                             )}
                             <li className="nav-item">
