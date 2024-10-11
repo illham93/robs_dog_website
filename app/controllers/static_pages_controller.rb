@@ -11,4 +11,8 @@ class StaticPagesController < ApplicationController
   def admin_home
     render 'admin_home'
   end
+
+  def admin_members
+    render 'admin_members'
+  end
 end

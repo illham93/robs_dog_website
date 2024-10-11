@@ -1,12 +1,8 @@
 import React from "react";
 import Layout from "../../layout";
 import { safeCredentials, handleErrors } from "../../utils/fetchHelper";
-import EditAnnouncements from "./editAnnouncements";
 
-import './adminHome.scss';
-import EditDogOfTheMonth from "./editDogOfTheMonth";
-
-class AdminHome extends React.Component {
+class AdminMembers extends React.Component {
 
     state = {
         admin: false,
@@ -37,9 +33,7 @@ class AdminHome extends React.Component {
             <Layout>
                 {admin ? (
                     <>
-                        <h1 className="text-center m-5">Admin Home</h1>
-                        <EditAnnouncements />
-                        <EditDogOfTheMonth />
+                        <h1 className="text-center m-5">Admin Members</h1>
                     </>
                 ) : (
                     <h3 className="text-center mt-5">You are not authorized to be here</h3>
@@ -49,4 +43,4 @@ class AdminHome extends React.Component {
     }
 }
 
-export default AdminHome;
+export default AdminMembers;
