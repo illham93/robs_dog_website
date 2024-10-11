@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     put '/dog-of-the-month' => 'dog_of_the_month#update'
 
     #users
+    get '/users' => 'users#index'
     post '/users' => 'users#create'
   end
 end
