@@ -6,10 +6,10 @@ module Api
       unless @user.admin?
         return render json: {error: 'Unauthorized'}, status: :forbidden
       end
-      
+
       users = User.order(created_at: :desc)
       if users
-        render json: {users: users}, status: :ok
+        render json: {users: users.as_json(except: [:password])}, status: :ok
       else
         render json: {error: 'users not found'}, status: :not_found
       end
