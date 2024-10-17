@@ -80,6 +80,7 @@ class EditAnnouncements extends React.Component {
                 console.log('announcement updated successfully', data);
             } else {
                 console.error('Error updating announcement', data);
+                this.setState({ error: error.error || 'Error updating announcement'});
             }
         })
         .catch(error => {

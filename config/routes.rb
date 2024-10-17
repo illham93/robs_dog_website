@@ -28,5 +28,8 @@ Rails.application.routes.draw do
     #users
     get '/users' => 'users#index'
     post '/users' => 'users#create'
+    put '/users/:id' => 'users#update'
+    put '/users/:id/add-member' => 'users#add_member'
+
   end
 end

@@ -52,6 +52,7 @@ class EditDogOfTheMonth extends React.Component {
                 console.log('Dog of the month updated successfully', data);
             } else {
                 console.error('Error updating dog of the month', data);
+                this.setState({ error: error.error || 'Error updating dog of the month'});
             }
         })
         .catch(error => {
