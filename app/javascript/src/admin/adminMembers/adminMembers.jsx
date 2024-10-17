@@ -10,7 +10,8 @@ class AdminMembers extends React.Component {
     state = {
         admin: false,
         error: '',
-        users: [],
+        members: [],
+        nonMembers: [],
     }
 
     componentDidMount() {
@@ -33,9 +34,12 @@ class AdminMembers extends React.Component {
             .then(handleErrors)
             .then(data => {
                 console.log(data);
+                const members = data.users.filter(user => user.member);
+                const nonMembers = data.users.filter(user => !user.member);
                 this.setState({
-                    users: data.users,
-                })
+                    members: members,
+                    nonMembers: nonMembers,
+                });
             })
             .catch(error => {
                 this.setState({
@@ -45,7 +49,7 @@ class AdminMembers extends React.Component {
     }
 
     render () {
-        const { admin, error } = this.state;
+        const { admin, error, members, nonMembers } = this.state;
 
         return (
             <Layout>
@@ -57,8 +61,8 @@ class AdminMembers extends React.Component {
                             ) : (
                                 <>
                                     <h1 className="text-center m-5">Admin Members</h1>
-                                    <MembersList />
-                                    <AddMembers />
+                                    <MembersList members={members}/>
+                                    <AddMembers nonMembers={nonMembers}/>
                                 </>
                             )}
                         </>
