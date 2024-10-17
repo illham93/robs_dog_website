@@ -12,9 +12,11 @@ class AdminMembers extends React.Component {
         error: '',
         members: [],
         nonMembers: [],
+        successMessage: '',
     }
 
     componentDidMount() {
+
         fetch('/api/authenticated')
             .then(handleErrors)
             .then(data => {
@@ -29,6 +31,12 @@ class AdminMembers extends React.Component {
                     error: error.error || 'Error authenticating user'
                 });
             });
+
+        const successMessage = sessionStorage.getItem('successMessage');
+        if (successMessage) {
+            this.setState({ successMessage });
+            sessionStorage.removeItem('successMessage');
+        }
 
         fetch('/api/users')
             .then(handleErrors)
@@ -49,13 +57,14 @@ class AdminMembers extends React.Component {
     }
 
     render () {
-        const { admin, error, members, nonMembers } = this.state;
+        const { admin, error, members, nonMembers, successMessage } = this.state;
 
         return (
             <Layout>
                 <div className="container">
                     {admin ? (
                         <>
+                            {successMessage && <h3 className="alert alert-success mt-3">{successMessage}</h3>}
                             {error ? (
                                 <h3 className="text-danger mt-2">Error: {error}</h3>
                             ) : (

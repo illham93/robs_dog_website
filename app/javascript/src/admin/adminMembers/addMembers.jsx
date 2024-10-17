@@ -7,6 +7,7 @@ class AddMembers extends React.Component {
         searchQuery: '',
         selectedUser: null,
         error: '',
+
     }
 
     addMember = (e, id) => {
@@ -19,6 +20,7 @@ class AddMembers extends React.Component {
         .then(handleErrors)
         .then(data => {
             if (data.success) {
+                sessionStorage.setItem('successMessage', 'Member added successfully');
                 window.location.reload();
                 console.log('Member added successfully', data);
             } else {
@@ -49,6 +51,7 @@ class AddMembers extends React.Component {
 
         return (
             <>
+
                 <h3 className="text-center mt-5 mb-5">Add Members</h3>
                 <h5>Search for user by email:</h5>
                 <input type="text" placeholder="Enter entire email" value={searchQuery} onChange={this.handleSearch} className="form-control mb-3"/>
