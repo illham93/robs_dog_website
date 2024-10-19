@@ -23,12 +23,12 @@ dogOfTheMonth = DogOfTheMonth.create([
 ])
 
 users = User.create([
-  { email: 'bob@test.com', password: 'testpass', admin: 0, member: 0, first_name: 'bob', last_name: 'jackson', phone: 123-456-7891, town: 'Toronto' },
-  { email: 'alice@test.com', password: 'testpass', admin: 0, member: 0, first_name: 'Alice', last_name: 'Smith', phone: 123-456-7891, town: 'Ottawa' },
-  { email: 'charles@test.com', password: 'testpass', admin: 0, member: 0, first_name: 'Chalres', last_name: 'Matthews', phone: 123-456-7891, town: 'Guelph' },
-  { email: 'david@test.com', password: 'testpass', admin: 0, member: 0, first_name: 'David', last_name: 'Davidson', phone: 123-456-7891, town: 'Kingston' },
-  { email: 'katie@test.com', password: 'testpass', admin: 0, member: 1, first_name: 'Katie', last_name: 'McPhee', phone: 123-456-7891, town: 'Toronto' },
-  { email: 'ken@test.com', password: 'testpass', admin: 0, member: 1, first_name: 'Ken', last_name: 'Hope', phone: 123-456-7891, town: 'Peterborough' },
-  { email: 'elliot@test.com', password: 'testpass', admin: 0, member: 1, first_name: 'Elliot', last_name: 'Rogers', phone: 123-456-7891, town: 'Cobourg' },
-  { email: 'mary@test.com', password: 'testpass', admin: 0, member: 1, first_name: 'Mary', last_name: 'Phillips', phone: 123-456-7891, town: 'Ottawa' },
+  { email: 'bob@test.com', password: 'testpass', admin: 0, member: 0, first_name: 'bob', last_name: 'jackson', phone: '123-456-7891', town: 'Toronto' },
+  { email: 'alice@test.com', password: 'testpass', admin: 0, member: 0, first_name: 'Alice', last_name: 'Smith', phone: '123-456-7891', town: 'Ottawa' },
+  { email: 'charles@test.com', password: 'testpass', admin: 0, member: 0, first_name: 'Chalres', last_name: 'Matthews', phone: '123-456-7891', town: 'Guelph' },
+  { email: 'david@test.com', password: 'testpass', admin: 0, member: 0, first_name: 'David', last_name: 'Davidson', phone: '123-456-7891', town: 'Kingston' },
+  { email: 'katie@test.com', password: 'testpass', admin: 0, member: 1, first_name: 'Katie', last_name: 'McPhee', phone: '123-456-7891', town: 'Toronto' },
+  { email: 'ken@test.com', password: 'testpass', admin: 0, member: 1, first_name: 'Ken', last_name: 'Hope', phone: '123-456-7891', town: 'Peterborough' },
+  { email: 'elliot@test.com', password: 'testpass', admin: 0, member: 1, first_name: 'Elliot', last_name: 'Rogers', phone: '123-456-7891', town: 'Cobourg' },
+  { email: 'mary@test.com', password: 'testpass', admin: 0, member: 1, first_name: 'Mary', last_name: 'Phillips', phone: '123-456-7891', town: 'Ottawa' },
 ])
