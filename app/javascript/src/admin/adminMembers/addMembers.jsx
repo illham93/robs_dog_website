@@ -7,7 +7,6 @@ class AddMembers extends React.Component {
         searchQuery: '',
         selectedUser: null,
         error: '',
-
     }
 
     addMember = (e, id) => {
@@ -48,7 +47,6 @@ class AddMembers extends React.Component {
 
         const { searchQuery, selectedUser, error } = this.state;
 
-
         return (
             <>
 
@@ -63,16 +61,16 @@ class AddMembers extends React.Component {
                             <h5>User found</h5>
                             <h5>Enter additional information for user:</h5>
                             <form onSubmit={(e) => this.addMember(e, selectedUser.id)} encType="multipart/form-data">
-                                <label for="first_name" className="form-label">First name</label>
+                                <label htmlFor="first_name" className="form-label">First name</label>
                                 <input type="text" className="form-control mb-2" name="first_name" required/>
 
-                                <label for="last_name" className="form-label">Last name</label>
+                                <label htmlFor="last_name" className="form-label">Last name</label>
                                 <input type="text" className="form-control mb-2" name="last_name" required/>
 
-                                <label for="phone" className="form-label">Phone</label>
+                                <label htmlFor="phone" className="form-label">Phone</label>
                                 <input type="tel" className="form-control mb-2" name="phone" required/>
 
-                                <label for="town" className="form-label">Town</label>
+                                <label htmlFor="town" className="form-label">Town</label>
                                 <input type="text" className="form-control mb-2" name="town" required/>
 
                                 <div className="mt-3">

@@ -42,7 +42,10 @@ class AdminMembers extends React.Component {
             .then(handleErrors)
             .then(data => {
                 console.log(data);
-                const members = data.users.filter(user => user.member);
+                const members = data.users.filter(user => user.member)
+                                          .sort((a, b) => {
+                                            return a.last_name.localeCompare(b.last_name);
+                                          });
                 const nonMembers = data.users.filter(user => !user.member);
                 this.setState({
                     members: members,
