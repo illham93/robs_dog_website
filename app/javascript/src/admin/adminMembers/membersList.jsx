@@ -29,8 +29,22 @@ class MembersList extends React.Component {
 
     save = (e, id) => {
         e.preventDefault();
-        // Todo: fetch call to update member
-        this.setState({ editId: null });
+        const {editingMember} = this.state;
+
+        fetch(`/api/users/${id}`, safeCredentials({
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(editingMember),
+        }))
+        .then(handleErrors)
+        .then (data => {
+            sessionStorage.setItem('successMessage', 'Member updated successfully');
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            this.setState({ error: error.error || 'Error updating user'});
+        })
     }
 
     render () {

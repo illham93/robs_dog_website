@@ -1,6 +1,6 @@
 module Api
   class UsersController < ApplicationController
-    before_action :authenticate_user!, only: [:index, :add_member]
+    before_action :authenticate_user!, only: [:index, :update, :add_member]
 
     def index
       unless @user.admin?
@@ -23,6 +23,20 @@ module Api
       else
         render json: { error: @user.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
+    end
+
+    def update
+      user = User.find(params[:id])
+
+      unless @user.admin? || @user == user
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      if user.update(user_params)
+        render json: {success: true}, status: :ok
+      else
+        render json: { error: @user.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end      
     end
 
     def add_member
