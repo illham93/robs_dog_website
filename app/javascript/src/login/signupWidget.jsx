@@ -24,10 +24,8 @@ class SignupWidget extends React.Component {
         fetch('/api/users', safeCredentials({
             method: 'POST',
             body: JSON.stringify({
-                user: {
-                    email: this.state.email,
-                    password: this.state.password,
-                }
+                email: this.state.email,
+                password: this.state.password,
             })
         }))
             .then(handleErrors)

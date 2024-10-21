@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   # 
   root to: "static_pages#home"
 
+  # Pages
   get '/login' => 'static_pages#login'
+  get '/members' => 'static_pages#members'
   
   # Admin
   get '/admin/home' => 'static_pages#admin_home'

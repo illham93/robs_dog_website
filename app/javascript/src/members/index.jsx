@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import Layout from "../layout";
-import Login from './login';
+import MembersHome from './membersHome';
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-        <Layout>
-            <Login />
-        </Layout>,
+        <MembersHome />,
         document.body.appendChild(document.createElement('div')),
     )
 })

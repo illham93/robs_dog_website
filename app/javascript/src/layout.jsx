@@ -63,9 +63,9 @@ const Layout = (props) => {
                                 <a className="nav-link text-white" href="/">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link text-white" href="/">Member Spotlight</a>
+                                <a className="nav-link text-white" href="/members">Members</a>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <a className="nav-link text-white" href="/">Hall of Fame</a>
                             </li>
                             <li className="nav-item">
@@ -73,7 +73,7 @@ const Layout = (props) => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link text-white" href="/">Merch</a>
-                            </li>
+                            </li> */}
                         </ul>
                         <ul className="navbar-nav ms-auto">
                             {admin && (
