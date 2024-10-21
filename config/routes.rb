@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     post '/users' => 'users#create'
     put '/users/:id' => 'users#update'
     put '/users/:id/add-member' => 'users#add_member'
+    put '/users/:id/remove-member' => 'users#remove_member'
 
   end
 end

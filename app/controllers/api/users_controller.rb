@@ -1,6 +1,6 @@
 module Api
   class UsersController < ApplicationController
-    before_action :authenticate_user!, only: [:index, :update, :add_member]
+    before_action :authenticate_user!, only: [:index, :update, :add_member, :remove_member]
 
     def index
       unless @user.admin?
@@ -49,6 +49,19 @@ module Api
         render json: {success: true}, status: :ok
       else
         render json: {error: 'Could not add member'}, status: :unprocessable_entity
+      end
+    end
+
+    def remove_member
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      user = User.find(params[:id])
+      if user.update(member: 0)
+        render json: {success: true}, status: :ok
+      else
+        render json: {error: 'Could not remove member'}, status: :unprocessable_entity
       end
     end
 

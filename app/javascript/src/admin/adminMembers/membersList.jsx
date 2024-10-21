@@ -37,7 +37,7 @@ class MembersList extends React.Component {
             body: JSON.stringify(editingMember),
         }))
         .then(handleErrors)
-        .then (data => {
+        .then(data => {
             sessionStorage.setItem('successMessage', 'Member updated successfully');
             window.location.reload();
         })
@@ -45,6 +45,25 @@ class MembersList extends React.Component {
             console.error('Error:', error);
             this.setState({ error: error.error || 'Error updating user'});
         })
+    }
+
+    remove = (e, id) => {
+        if (confirm('Are you sure you want to remove this member?')) {
+            e.preventDefault();
+
+            fetch(`/api/users/${id}/remove-member`, safeCredentials({
+                method: 'PUT',
+            }))
+            .then(handleErrors)
+            .then(data => {
+                sessionStorage.setItem('successMessage', 'Member removed successfully');
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                this.setState({ error: error.error || 'Error removing user'});
+            })
+        }  
     }
 
     render () {
@@ -85,7 +104,7 @@ class MembersList extends React.Component {
                                                     </button>
                                                 </td>
                                                 <td className="text-center">
-                                                    <button className="btn btn-danger" onClick={(e) => this.delete(e, member.id)}>
+                                                    <button className="btn btn-danger" onClick={(e) => this.remove(e, member.id)}>
                                                         <i className="fa-solid fa-trash-can"></i>
                                                     </button>
                                                 </td>
@@ -103,7 +122,7 @@ class MembersList extends React.Component {
                                                     </button>
                                                 </td>
                                                 <td className="text-center">
-                                                    <button className="btn btn-danger" onClick={(e) => this.delete(e, member)}>
+                                                    <button className="btn btn-danger" onClick={(e) => this.remove(e, member.id)}>
                                                         <i className="fa-solid fa-trash-can"></i>
                                                     </button>
                                                 </td>
