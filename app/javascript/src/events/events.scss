@@ -4,4 +4,39 @@
 
 .rbc-calendar {
     height: 100%;
+    background-color: white;
+}
+
+.rbc-event {
+    background-color: #007bff;
+    color: white;
+}
+
+.rbc-event:hover {
+    background-color: #0056b3;
+}
+
+.rbc-day-slot {
+    color: black;
+}
+
+.rbc-header {
+    background-color: #f8f9fa;
+    color: black;
+}
+
+.rbc-month-view {
+    color: black;
+}
+
+.rbc-toolbar {
+    color: black;
+}
+
+.rbc-toolbar button {
+    color: black;
+}
+
+.rbc-toolbar .rbc-btn-group {
+    background-color: white;
 }

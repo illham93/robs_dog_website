@@ -35,8 +35,15 @@ class Events extends React.Component {
                         <h3 className="text-danger mt-2">Error: {error}</h3>
                     ) : (
                       <>
-                        <div id="events-calendar">
-                            <Calendar localizer={localizer} events={events} startAccessor='start' endAccessor='end' style={{ height: '600px' }}/>
+                        <div id="events-calendar" className="bg-dark p-3 mb-5 rounded shadow">
+                            <Calendar 
+                                className="rounded" 
+                                localizer={localizer} 
+                                events={events} 
+                                startAccessor='start' 
+                                endAccessor='end'
+                                views={{month: true}}
+                                defaultView="month"/>
                         </div>
                       </>  
                     )}
