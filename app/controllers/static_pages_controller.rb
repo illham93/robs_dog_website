@@ -23,4 +23,8 @@ class StaticPagesController < ApplicationController
   def admin_members
     render 'admin_members'
   end
+
+  def admin_events
+    render 'admin_events'
+  end
 end

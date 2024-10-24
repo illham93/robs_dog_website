@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # Admin
   get '/admin/home' => 'static_pages#admin_home'
   get '/admin/members' => 'static_pages#admin_members'
+  get '/admin/events' => 'static_pages#admin_events'
 
   namespace :api do
     #sessions

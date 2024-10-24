@@ -82,6 +82,7 @@ const Layout = (props) => {
                                     <div className="dropdown-menu" aria-labelledby="adminDropdown">
                                         <a className="dropdown-item" href="/admin/home">Home</a>
                                         <a className="dropdown-item" href="/admin/members">Members</a>
+                                        <a className="dropdown-item" href="/admin/events">Events</a>
                                     </div>
                                 </li>
                             )}
