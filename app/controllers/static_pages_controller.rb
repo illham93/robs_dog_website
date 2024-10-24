@@ -6,6 +6,11 @@ class StaticPagesController < ApplicationController
   def members
     render 'members'
   end
+
+  def events
+    render 'events'
+  end
+  
   def login
     render 'login'
   end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # Pages
   get '/login' => 'static_pages#login'
   get '/members' => 'static_pages#members'
+  get '/events' => 'static_pages#events'
   
   # Admin
   get '/admin/home' => 'static_pages#admin_home'

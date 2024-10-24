@@ -65,10 +65,10 @@ const Layout = (props) => {
                             <li className="nav-item">
                                 <a className="nav-link text-white" href="/members">Members</a>
                             </li>
-                            {/* <li className="nav-item">
-                                <a className="nav-link text-white" href="/">Hall of Fame</a>
-                            </li>
                             <li className="nav-item">
+                                <a className="nav-link text-white" href="/events">Events</a>
+                            </li>
+                            {/*<li className="nav-item">
                                 <a className="nav-link text-white" href="/">Events</a>
                             </li>
                             <li className="nav-item">
