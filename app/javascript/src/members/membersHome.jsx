@@ -43,8 +43,10 @@ class MembersHome extends React.Component {
         } else if (!authenticated) {
             content = (
                 <>
-                    <h3>You must be logged in before you can view the members area</h3>
-                    <Login />
+                    <div className="container">
+                        <h3 className="text-center mt-5">You must be logged in before you can view the members area</h3>
+                        <Login />
+                    </div>
                 </>
             );
         } else if (authenticated && !member) {

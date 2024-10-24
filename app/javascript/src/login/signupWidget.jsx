@@ -6,6 +6,7 @@ class SignupWidget extends React.Component {
     state = {
         email: '',
         password: '',
+        passwordConfirm: '',
         error: '',
     }
 
@@ -20,6 +21,11 @@ class SignupWidget extends React.Component {
         this.setState({
             error: '',
         });
+
+        if (this.state.password !== this.state.passwordConfirm) {
+            alert('Password confirmation does not match')
+            return;
+        }
 
         fetch('/api/users', safeCredentials({
             method: 'POST',
@@ -72,12 +78,13 @@ class SignupWidget extends React.Component {
     }
 
     render () {
-        const {email, password, error} = this.state;
+        const {email, password, passwordConfirm, error} = this.state;
         return (
             <React.Fragment>
                 <form onSubmit={this.signup}>
                     <input name="email" type="text" className="form-control form-control-lg mb-3" placeholder="Email" value={email} onChange={this.handleChange} required />
                     <input name="password" type="password" className="form-control form-control-lg mb-3" placeholder="Password" value={password} onChange={this.handleChange} required />
+                    <input name="passwordConfirm" type="password" className="form-control form-control-lg mb-3" placeholder="Confirm Password" value={passwordConfirm} onChange={this.handleChange} required />
                     <button type="submit" className="btn btn-primary btn-block btn-lg">Sign Up</button>
                 </form>
                 {error && <div className="alert alert-danger mt-3">{error}</div>}
