@@ -77,7 +77,7 @@ class AdminEvents extends React.Component {
                                 <EventsCalendar />
 
                                 <h3>Add event:</h3>
-                                <form className="mb-3">
+                                <form onSubmit={(e) => this.addEvent(e)} className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
                                     <input type="text" className="form-control mb-2" name="title" required />
 
