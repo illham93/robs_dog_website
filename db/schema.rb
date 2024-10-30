@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2024_10_24_201746) do
     t.string "title"
     t.text "description"
     t.date "date"
-    t.time "start_time"
-    t.time "end_time"
+    t.string "start_time"
+    t.string "end_time"
     t.string "location"
     t.boolean "multi_day"
     t.datetime "created_at", precision: 6, null: false

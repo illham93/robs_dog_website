@@ -41,9 +41,12 @@ class AdminEvents extends React.Component {
     addEvent = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        const wrappedData = { event: data };
         fetch(`/api/events`, safeCredentialsFormData({
             method: 'POST',
-            body: formData,
+            body: JSON.stringify(wrappedData),
+            headers: { 'Content-Type': 'application/json' }
         }))
         .then(handleErrors)
         .then(data => {
@@ -91,7 +94,7 @@ class AdminEvents extends React.Component {
                                     <input type="time" className="form-control mb-2" name="start_time" required />
 
                                     <label htmlFor="end_time" className="form-label">End Time</label>
-                                    <input type="time" className="form-control mb-2" name="start_time" />
+                                    <input type="time" className="form-control mb-2" name="end_time" />
 
                                     <label htmlFor="location" className="form-label">Location</label>
                                     <input type="text" className="form-control mb-2" name="location" required />

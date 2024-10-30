@@ -2,6 +2,15 @@ module Api
   class EventsController < ApplicationController
     before_action :authenticate_user!, only: [:create, :destroy, :update]
 
+    def index
+      @events = Event.order(date: :desc)
+      if @events
+        render json: {events: @events}, status: :ok
+      else
+        render json: {error: 'events not found'}, status: :not_found
+      end
+    end
+
     def create
       unless @user.admin?
         return render json: {error: 'Unauthorized'}, status: :forbidden
@@ -18,7 +27,7 @@ module Api
     private
 
     def event_params
-      params.permit(:title, :description, :date, :start_time, :end_time, :location, :multi_day)
+      params.require(:event).permit(:title, :description, :date, :start_time, :end_time, :location, :multi_day)
     end
   end
 end
