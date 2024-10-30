@@ -7,7 +7,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
 
-class Events extends React.Component {
+class EventsCalendar extends React.Component {
 
     state = {
         events: [
@@ -26,15 +26,14 @@ class Events extends React.Component {
 
         return (
             <div className="container text-center">
-                <h2 className="mt-5 mb-3">Events</h2>
-
+                
                 {loading && <h3>Loading...</h3>}
 
                 {error ? (
                     <h3 className="text-danger mt-2">Error: {error}</h3>
                 ) : (
                     <>
-                    <div id="events-calendar" className="bg-dark p-3 mb-5 rounded shadow">
+                    <div id="calendar-container" className="bg-dark p-3 mb-5 rounded">
                         <Calendar 
                             className="rounded" 
                             localizer={localizer} 
@@ -51,4 +50,4 @@ class Events extends React.Component {
     }
 }
 
-export default Events
+export default EventsCalendar

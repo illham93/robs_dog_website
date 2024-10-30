@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     put '/users/:id/remove-member' => 'users#remove_member'
 
     #events
-    
+    get '/events' => 'events#index'
     post '/events' => 'events#create'
   end
 end
