@@ -38,6 +38,20 @@ module Api
       end
     end
 
+    def destroy
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      event = Event.find(params[:id])
+      if event
+        event.destroy
+        render json: {success: true}, status: :ok
+      else
+        render json: {error: 'Event not found'}, status: :not_found
+      end
+    end
+
     private
 
     def event_params

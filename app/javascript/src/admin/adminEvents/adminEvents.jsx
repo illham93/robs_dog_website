@@ -93,6 +93,27 @@ class AdminEvents extends React.Component {
         });
     }
 
+    deleteEvent = () => {
+        if (confirm('Are you sure you want to delete this event?')) {
+            const id = this.state.selectedEvent.id;
+
+            fetch(`/api/events/${id}`, safeCredentials({
+                method: 'DELETE',
+            }))
+            .then(handleErrors)
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.setItem('successMessage', 'Event deleted successfully');
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error: ', error)
+                this.setState({ error: error.message || 'Error deleting event' });
+            });
+        }
+    }
+
     handleEventClick = (event) => {
         this.setState({ 
             selectedEvent: event, 
@@ -162,6 +183,9 @@ class AdminEvents extends React.Component {
                                             <br/>
                                             <button className="btn btn-success" onClick={this.editEvent}>
                                                 Save <i className="fa-solid fa-floppy-disk"></i>
+                                            </button>
+                                            <button className="btn btn-danger ms-2" onClick={this.deleteEvent} >
+                                                Delete <i className="fa-solid fa-trash-can"></i>
                                             </button>
                                         </div>
                                     </>

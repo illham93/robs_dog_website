@@ -40,5 +40,6 @@ Rails.application.routes.draw do
     get '/events' => 'events#index'
     post '/events' => 'events#create'
     put '/events/:id' => 'events#update'
+    delete '/events/:id' => 'events#destroy'
   end
 end
