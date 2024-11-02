@@ -88,13 +88,13 @@ class AdminEvents extends React.Component {
                                     <textarea type="text" className="form-control mb-2" name="description" required />
 
                                     <label htmlFor="date" className="form-label">Date</label>
-                                    <input type="date" className="form-control mb-2" name="date" required />
+                                    <input type="date" className="form-control mb-2 date-time-input" name="date" required />
 
                                     <label htmlFor="start_time" className="form-label">Start Time</label>
-                                    <input type="time" className="form-control mb-2" name="start_time" required />
+                                    <input type="time" className="form-control mb-2 date-time-input" name="start_time" required />
 
                                     <label htmlFor="end_time" className="form-label">End Time</label>
-                                    <input type="time" className="form-control mb-2" name="end_time" />
+                                    <input type="time" className="form-control mb-2 date-time-input" name="end_time" />
 
                                     <label htmlFor="location" className="form-label">Location</label>
                                     <input type="text" className="form-control mb-2" name="location" required />

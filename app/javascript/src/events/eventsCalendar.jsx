@@ -1,20 +1,40 @@
 import React from "react";
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import ReactTooltip from 'react-tooltip';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { handleErrors } from "../utils/fetchHelper";
 
 const localizer = momentLocalizer(moment);
 
+const EventTooltip = ({event}) => (
+    <div className="calendar-tooltip" data-tip data-for={`event-${event.id}`}>
+        {event.title}
+        <ReactTooltip className="calendar-tooltip" id={`event-${event.id}`} place="top" effect="solid">
+            <div className="tooltip-content">
+                <p><strong>{event.title}</strong></p>
+                <p>{event.description}</p>
+                <p>Start time: {moment(event.start).format('h:mm a')}</p>
+                <p>End time: {moment(event.end).format('h:mm a')}</p>
+                <p>Location: {event.location}</p>
+                {event.multi_day && <p>*This is a multi-day event</p>}
+            </div>
+        </ReactTooltip>
+    </div>
+);
+
 class EventsCalendar extends React.Component {
 
     state = {
         events: [
             {
+                id: 1,
                 title: 'test event',
                 start: new Date(2024, 9, 26, 10, 0),
                 end: new Date(2024, 9, 26, 12, 0),
+                description: 'This is a test event',
+                location: 'test location',
             },
         ],
         loading: true,
@@ -38,18 +58,22 @@ class EventsCalendar extends React.Component {
                     const [endHour, endMinute] = event.end_time ? event.end_time.split(':').map(Number) : [startHour, startMinute];
 
                     return {
+                        id: event.id,
                         title: event.title,
                         description: event.description,
                         location: event.location,
                         start: new Date(year, month - 1, day, startHour, startMinute),
-                        end: new Date(year, month - 1, day, endHour, endMinute)
+                        end: new Date(year, month - 1, day, endHour, endMinute),
+                        multi_day: event.multi_day
                     };
                 }).filter(event => event !== null); // remove null entries
                 console.log(events);
                 this.setState({
                     loading: false,
                     events: events,
-                })
+                }, () => {
+                    ReactTooltip.rebuild();
+                });
             })
             .catch(error => {
                 this.setState({
@@ -79,7 +103,11 @@ class EventsCalendar extends React.Component {
                             startAccessor='start' 
                             endAccessor='end'
                             views={{month: true}}
-                            defaultView="month"/>
+                            defaultView="month"
+                            components={{
+                                event: EventTooltip
+                            }}
+                        />
                     </div>
                     </>  
                 )}

@@ -3,6 +3,21 @@
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
+.calendar-tooltip {
+    max-width: 600px;
+    word-wrap: break-word;
+    white-space: normal;
+    position: relative;
+
+    .tooltip-content {
+        font-size: 14pt;
+    }
+
+    .__react_component_tooltip {
+        z-index: 10000 !important;
+    }
+}
+
 .rbc-calendar {
     height: 100%;
     background-color: white;
