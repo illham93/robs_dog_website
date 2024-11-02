@@ -24,6 +24,20 @@ module Api
       end
     end
 
+    def update
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      event = Event.find(params[:id])
+
+      if event.update(event_params)
+        render json: {success: true}, status: :ok
+      else
+        render json: {error: 'Error updating event'}, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def event_params

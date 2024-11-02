@@ -16,7 +16,9 @@ const EventTooltip = ({event}) => (
                 <p><strong>{event.title}</strong></p>
                 <p>{event.description}</p>
                 <p>Start time: {moment(event.start).format('h:mm a')}</p>
-                <p>End time: {moment(event.end).format('h:mm a')}</p>
+                {event.end.getTime() !== event.start.getTime() && (
+                    <p>End time: {moment(event.end).format('h:mm a')}</p>
+                )}
                 <p>Location: {event.location}</p>
                 {event.multi_day && <p>*This is a multi-day event</p>}
             </div>
@@ -52,7 +54,6 @@ class EventsCalendar extends React.Component {
                         console.warn('Skipping event due to missing date or start time:', event);
                         return null;
                     }
-                    console.log("Event Data:", event.date, event.start_time, event.end_time);
                     const [year, month, day] = event.date.split('-').map(Number);
                     const [startHour, startMinute] = event.start_time.split(':').map(Number);
                     const [endHour, endMinute] = event.end_time ? event.end_time.split(':').map(Number) : [startHour, startMinute];
@@ -85,6 +86,7 @@ class EventsCalendar extends React.Component {
 
     render () {
         const {loading, error, events} = this.state;
+        const {onEventClick} = this.props;
 
         return (
             <div className="container text-center">
@@ -107,6 +109,7 @@ class EventsCalendar extends React.Component {
                             components={{
                                 event: EventTooltip
                             }}
+                            onSelectEvent={onEventClick}
                         />
                     </div>
                     </>  
