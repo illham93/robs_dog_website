@@ -56,3 +56,22 @@
 .rbc-toolbar .rbc-btn-group {
     background-color: white;
 }
+
+.react-tooltip {
+    position: absolute;
+    z-index: 1000;
+    background-color: #222;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .react-tooltip.show {
+    opacity: 1;
+  }
+  
