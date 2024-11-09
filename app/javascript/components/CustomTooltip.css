@@ -1,0 +1,31 @@
+.custom-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+    width: 100%; /* Ensure the wrapper takes full width */
+    height: 100%; /* Ensure the wrapper takes full height */
+}
+
+.custom-tooltip {
+    position: absolute;
+    transform: translate(-50%, 10px); /* Adjust the position */
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    max-width: 400px;
+    word-wrap: break-word; /* Ensure text wraps */
+    white-space: normal; /* Allow text to wrap */
+}
+
+.custom-tooltip::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+}
