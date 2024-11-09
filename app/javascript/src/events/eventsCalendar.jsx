@@ -10,7 +10,7 @@ const localizer = momentLocalizer(moment);
 
 const EventTooltip = ({ event }) => (
     <CustomTooltip event={event}>
-        <div className="calendar-event">
+        <div className="calendar-event" title="">
             {event.title}
         </div>
     </CustomTooltip>
