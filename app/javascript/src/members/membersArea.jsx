@@ -11,7 +11,10 @@ class MembersArea extends React.Component {
         const { loading, error } = this.state;
 
         return (
-            <h3>This is the members area page</h3>
+            <div className="container text-center mt-3">
+                <h3>Members Area</h3>
+                <h3>*Under Development*</h3>
+            </div>
         )
     }
 }

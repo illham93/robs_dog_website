@@ -5,7 +5,7 @@ class User < ApplicationRecord
   
   validates :email, presence: true, length: {minimum: 5, maximum: 100}, uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX, message: " address is not valid" }
 
-  after_validation :hash_password
+  before_save :hash_password, if: :password_changed?
 
   def admin?
     self.admin
@@ -14,6 +14,8 @@ class User < ApplicationRecord
   private 
 
   def hash_password
-    self.password = BCrypt::Password.create(password)
+    if password.present? && !password.starts_with?('$2a$')
+      self.password = BCrypt::Password.create(password)
+    end
   end
 end

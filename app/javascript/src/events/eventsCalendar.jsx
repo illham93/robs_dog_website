@@ -16,24 +16,6 @@ const EventTooltip = ({ event }) => (
     </CustomTooltip>
 );
 
-// const EventTooltip = ({event}) => (
-//     <div className="calendar-tooltip" data-tip data-for={`event-${event.id}`}>
-//         {event.title}
-//         <ReactTooltip className="calendar-tooltip" id={`event-${event.id}`} place="top" effect="solid">
-//             <div className="tooltip-content">
-//                 <p><strong>{event.title}</strong></p>
-//                 <p>{event.description}</p>
-//                 <p>Start time: {moment(event.start).format('h:mm a')}</p>
-//                 {event.end.getTime() !== event.start.getTime() && (
-//                     <p>End time: {moment(event.end).format('h:mm a')}</p>
-//                 )}
-//                 <p>Location: {event.location}</p>
-//                 {event.multi_day && <p>*This is a multi-day event</p>}
-//             </div>
-//         </ReactTooltip>
-//     </div>
-// );
-
 class EventsCalendar extends React.Component {
 
     state = {

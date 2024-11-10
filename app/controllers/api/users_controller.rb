@@ -68,7 +68,9 @@ module Api
     private
 
     def user_params
-      params.permit(:email, :password, :member, :first_name, :last_name, :phone, :town)
-    end
+      params.permit(:email, :password, :member, :first_name, :last_name, :phone, :town).tap do |whitelisted|
+        whitelisted.delete(:password) if whitelisted[:password].blank?
+      end
+    end    
   end
 end
