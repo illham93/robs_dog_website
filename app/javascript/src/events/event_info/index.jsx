@@ -7,8 +7,8 @@ import EventInfo from './eventInfo';
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
         <Layout>
-            <div className="container text-center">
-                <h2 className="mt-5 mb-3">Event Info</h2>
+            <div className="container">
+                <h2 className="mt-5 mb-3 text-center">Event Info</h2>
                 <EventInfo />
             </div>
         </Layout>,

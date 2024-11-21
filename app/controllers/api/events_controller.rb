@@ -52,6 +52,15 @@ module Api
       end
     end
 
+    def show
+      event = Event.find(params[:id])
+      if event
+        render json: {event: event}, status: :ok
+      else
+        render json: {error: 'Event not found'}, status: :not_found
+      end
+    end
+
     private
 
     def event_params

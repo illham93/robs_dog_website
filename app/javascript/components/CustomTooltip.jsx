@@ -38,31 +38,33 @@ const CustomTooltip = ({ event, children }) => {
     const hideTooltip = () => setVisible(false);
 
     return (
-        <div 
-            className="custom-tooltip-wrapper" 
-            onMouseEnter={showTooltip} 
-            onMouseLeave={hideTooltip}
-        >
-            {children}
-            {visible && ReactDOM.createPortal(
-                <div 
-                    className="custom-tooltip" 
-                    style={{ top: tooltipPosition.top, left: tooltipPosition.left }}
-                >
-                    <div className="tooltip-content">
-                        <p><strong>{event.title}</strong></p>
-                        <p>{event.description}</p>
-                        <p>Start time: {moment(event.start).format('h:mm a')}</p>
-                        {event.end.getTime() !== event.start.getTime() && (
-                            <p>End time: {moment(event.end).format('h:mm a')}</p>
-                        )}
-                        <p>Location: {event.location}</p>
-                        {event.multi_day && <p>*This is a multi-day event</p>}
-                    </div>
-                </div>,
-                document.body
-            )}
-        </div>
+            <div
+                className="custom-tooltip-wrapper"
+                onMouseEnter={showTooltip}
+                onMouseLeave={hideTooltip}
+            >
+                {children}
+                {visible && ReactDOM.createPortal(
+                    <a className="text-white" href={`/events/${event.id}`}>
+                        <div
+                            className="custom-tooltip"
+                            style={{ top: tooltipPosition.top, left: tooltipPosition.left }}
+                        >
+                            <div className="tooltip-content">
+                                <p><strong>{event.title}</strong></p>
+                                <p>{event.description}</p>
+                                <p>Start time: {moment(event.start).format('h:mm a')}</p>
+                                {event.end.getTime() !== event.start.getTime() && (
+                                    <p>End time: {moment(event.end).format('h:mm a')}</p>
+                                )}
+                                <p>Location: {event.location}</p>
+                                {event.multi_day && <p>*This is a multi-day event</p>}
+                            </div>
+                        </div>
+                    </a>,
+                    document.body
+                )}
+            </div>
     );
 };
 
