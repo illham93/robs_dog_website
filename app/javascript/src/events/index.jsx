@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <Layout>
             <div className="container text-center">
                 <h2 className="mt-5 mb-3">Events</h2>
-                <EventsCalendar />
+                <EventsCalendar includeLink={true} />
             </div>
         </Layout>,
         document.body.appendChild(document.createElement('div')),

@@ -8,15 +8,25 @@ import { handleErrors } from "../utils/fetchHelper";
 
 const localizer = momentLocalizer(moment);
 
-const EventTooltip = ({ event }) => (
-    <a className="text-white" href={`/events/${event.id}`}>
-        <CustomTooltip event={event}>
+const EventTooltip = ({ event, includeLink }) => {
+    // Include the link to the event_info page if we are on the /events page, but not if we are on the /admin/events page
+
+    const content = (
+        <CustomTooltip event={event} includeLink={includeLink}>
             <div className="calendar-event" title="">
                 {event.title}
             </div>
         </CustomTooltip>
-    </a>
-);
+    );
+
+    return includeLink ? (
+        <a className="text-white" href={`/events/${event.id}`}>
+            {content}
+        </a>
+    ) : (
+        content
+    );
+};
 
 class EventsCalendar extends React.Component {
 
@@ -67,7 +77,7 @@ class EventsCalendar extends React.Component {
 
     render () {
         const {loading, error, events} = this.state;
-        const {onEventClick} = this.props;
+        const {onEventClick, includeLink} = this.props;
 
         return (
             <div className="container text-center">
@@ -88,7 +98,7 @@ class EventsCalendar extends React.Component {
                             views={{month: true}}
                             defaultView="month"
                             components={{
-                                event: EventTooltip
+                                event: (props) => <EventTooltip {...props} includeLink={includeLink} />
                             }}
                             onSelectEvent={onEventClick}
                         />

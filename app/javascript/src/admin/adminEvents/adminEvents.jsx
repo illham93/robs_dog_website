@@ -152,7 +152,7 @@ class AdminEvents extends React.Component {
                         ) : (
                             <>
                                 <h3 className="mt-3 text-center">Admin</h3>
-                                <EventsCalendar onEventClick={this.handleEventClick}/>
+                                <EventsCalendar onEventClick={this.handleEventClick} includeLink={false} />
 
                                 <h3>Edit event:</h3>
                                 { selectedEvent ? (
@@ -174,8 +174,11 @@ class AdminEvents extends React.Component {
                                             <input type="time" className="form-control mb-2 date-time-input" name="end_time" value={formValues.end_time} onChange={this.handleInputChange}
                                             />
 
-                                            <label htmlFor="location" className="form-label">Location</label>
+                                            <label htmlFor="location" className="form-label">Location (This is just a short form that will be shown in the tooltip)</label>
                                             <input type="text" className="form-control mb-2" name="location" value={formValues.location} onChange={this.handleInputChange} required />
+
+                                            <label htmlFor="address" className="form-label">Address (This is the full address that will be used on the event info page)</label>
+                                            <input type="text" className="form-control mb-2" name="address" value={formValues.address} onChange={this.handleInputChange} required />
 
                                             <label htmlFor="multi_day" className="form-label">Multi-day?</label>
                                             <input type="checkbox" className="mb-2 ms-2" name="multi_day" checked={formValues.multi_day} onChange={this.handleInputChange} />
@@ -210,8 +213,11 @@ class AdminEvents extends React.Component {
                                     <label htmlFor="end_time" className="form-label">End Time</label>
                                     <input type="time" className="form-control mb-2 date-time-input" name="end_time" />
 
-                                    <label htmlFor="location" className="form-label">Location</label>
+                                    <label htmlFor="location" className="form-label">Location (This is just a short form that will be shown in the tooltip)</label>
                                     <input type="text" className="form-control mb-2" name="location" required />
+
+                                    <label htmlFor="address" className="form-label">Address (This is the full address that will be used on the event info page)</label>
+                                    <input type="text" className="form-control mb-2" name="address" required />
 
                                     <label htmlFor="multi_day" className="form-label">Multi-day?</label>
                                     <input type="checkbox" className="mb-2 ms-2" name="multi_day" />
