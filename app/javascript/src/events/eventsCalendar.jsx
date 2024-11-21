@@ -56,6 +56,7 @@ class EventsCalendar extends React.Component {
                         title: event.title,
                         description: event.description,
                         location: event.location,
+                        address: event.address,
                         start: new Date(year, month - 1, day, startHour, startMinute),
                         end: new Date(year, month - 1, day, endHour, endMinute),
                         multi_day: event.multi_day

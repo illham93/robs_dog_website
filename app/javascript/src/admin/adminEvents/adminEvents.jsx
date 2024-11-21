@@ -20,6 +20,7 @@ class AdminEvents extends React.Component {
             start_time: '',
             end_time: '',
             location: '',
+            address: '',
             multi_day: false,
         }
     }
@@ -124,6 +125,7 @@ class AdminEvents extends React.Component {
                 start_time: moment(event.start).format('HH:mm'),
                 end_time: event.end.getTime() !== event.start.getTime() ? moment(event.end).format('HH:mm') : '',
                 location: event.location,
+                address: event.address,
                 multi_day: event.multi_day || false,
             }
         });
