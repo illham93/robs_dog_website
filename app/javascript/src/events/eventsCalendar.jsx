@@ -9,26 +9,19 @@ import { handleErrors } from "../utils/fetchHelper";
 const localizer = momentLocalizer(moment);
 
 const EventTooltip = ({ event }) => (
-    <CustomTooltip event={event}>
-        <div className="calendar-event" title="">
-            {event.title}
-        </div>
-    </CustomTooltip>
+    <a className="text-white" href={`/events/${event.id}`}>
+        <CustomTooltip event={event}>
+            <div className="calendar-event" title="">
+                {event.title}
+            </div>
+        </CustomTooltip>
+    </a>
 );
 
 class EventsCalendar extends React.Component {
 
     state = {
-        events: [
-            {
-                id: 1,
-                title: 'test event',
-                start: new Date(2024, 9, 26, 10, 0),
-                end: new Date(2024, 9, 26, 12, 0),
-                description: 'This is a test event',
-                location: 'test location',
-            },
-        ],
+        events: [],
         loading: true,
         error: '',
     }

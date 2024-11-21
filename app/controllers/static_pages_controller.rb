@@ -10,6 +10,11 @@ class StaticPagesController < ApplicationController
   def events
     render 'events'
   end
+
+  def event_info
+    @event = Event.find(params[:id])
+    render 'event_info'
+  end
   
   def login
     render 'login'
