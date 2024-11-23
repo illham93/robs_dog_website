@@ -41,6 +41,9 @@ class EventInfo extends React.Component {
             return <h3 className="text-danger mt-2">Error: {error}</h3>;
         }
 
+        const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+        const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(event.address)}`;
+
         return (
             <div className="container">
                 <h4>Event Title: {event.title}</h4>
@@ -56,8 +59,17 @@ class EventInfo extends React.Component {
                         *This is part of a multi-day event
                     </h5>
                 )}
+                <p>Address: {event.address}</p>
+                <iframe
+                    width='600'
+                    height='450'
+                    frameBorder='0'
+                    style={{ border: 0 }}
+                    src={googleMapsUrl}
+                    allowFullScreen
+                />
             </div>
-        )
+        );
     }
 }
 

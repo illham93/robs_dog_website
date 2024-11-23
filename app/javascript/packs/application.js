@@ -10,6 +10,7 @@ import * as ActiveStorage from "@rails/activestorage"
 // import 'bootstrap'
 // import '../../assets/stylesheets/application.css';
 
+
 Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()

@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './event_info.scss';
 import Layout from "../../layout";
 import EventInfo from './eventInfo';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
