@@ -47,7 +47,7 @@ const CustomTooltip = ({ event, children, includeLink }) => {
             {children}
             {visible && ReactDOM.createPortal(
             <div className="custom-tooltip" style={{ top: tooltipPosition.top, left: tooltipPosition.left }}>
-                <a className="text-white" href={`/events/${event.id}`}>
+                <a className="text-white text-decoration-none" href={`/events/${event.id}`}>
                     <div className="tooltip-content">
                         <p><strong>{event.title}</strong></p>
                         <p>{event.description}</p>
