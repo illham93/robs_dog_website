@@ -41,7 +41,7 @@ class EventInfo extends React.Component {
             return <h3 className="text-danger mt-2">Error: {error}</h3>;
         }
 
-        const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+        const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
         const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(event.address)}`;
 
         return (
