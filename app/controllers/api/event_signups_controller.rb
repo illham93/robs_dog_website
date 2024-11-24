@@ -7,7 +7,7 @@ module Api
       if event_signup
         render json: {signedUp: true}, status: :ok
       else
-        render json: {signedUp: false}, status: :not_found
+        render json: {signedUp: false}, status: :ok
       end
     end
 
