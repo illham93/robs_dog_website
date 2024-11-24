@@ -1,5 +1,5 @@
 import React from "react";
-import { handleErrors } from "../../utils/fetchHelper";
+import { handleErrors, safeCredentials } from "../../utils/fetchHelper";
 
 class EventInfo extends React.Component {
 
@@ -9,6 +9,8 @@ class EventInfo extends React.Component {
         error: '',
         event: {},
         authenticated: false,
+        user_id: '',
+        successMessage: '',
     }
 
     componentDidMount() {
@@ -18,6 +20,7 @@ class EventInfo extends React.Component {
             .then(data => {
                 this.setState({
                     authenticated: data.authenticated,
+                    user_id: data.user_id,
                     member: data.member,
                     loadingAuthentication: false,
                 });
@@ -33,24 +36,54 @@ class EventInfo extends React.Component {
         const id = url.substring(url.lastIndexOf('/') + 1);
 
         fetch(`/api/event/${id}`)
-            .then(handleErrors)
-            .then(data => {
-                console.log(data);
-                this.setState({
-                    loading: false,
-                    event: data.event,
-                })
+        .then(handleErrors)
+        .then(data => {
+            console.log(data);
+            this.setState({
+                loading: false,
+                event: data.event,
             })
-            .catch(error => {
-                this.setState({
-                    loading: false,
-                    error: error.message || 'Error retrieving event'
-                });
+        })
+        .catch(error => {
+            this.setState({
+                loading: false,
+                error: error.message || 'Error retrieving event'
             });
+        });
+
+        const successMessage = sessionStorage.getItem('successMessage');
+        if (successMessage) {
+            this.setState({ successMessage });
+            sessionStorage.removeItem('successMessage');
+        }
+    }
+
+    signUp = () => {
+        const user_id = this.state.user_id;
+        const event_id = this.state.event.id;
+
+        fetch(`/api/event_signups/${user_id}/${event_id}`, safeCredentials({
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}
+        }))
+        .then(handleErrors)
+        .then (data => {
+            if (data.success) {
+                sessionStorage.setItem('successMessage', 'Signed up for event!');
+                window.location.reload();
+            } else {
+                console.error('Error signing up for event', data);
+                this.setState({error: data.error || 'Error signing up for event'});
+            }
+        })
+        .catch(error => {
+            console.error('Error: ', error.error);
+            this.setState({error: error.error || 'Error signing up for event'});
+        })
     }
 
     render () {
-        const {loading, loadingAuthentication, authenticated, error, event} = this.state;
+        const {loading, loadingAuthentication, authenticated, error, event, successMessage} = this.state;
 
         if (loading) {
             return <h3>Loading...</h3>;
@@ -65,6 +98,7 @@ class EventInfo extends React.Component {
 
         return (
             <div className="container rounded-grey-background text-shadow">
+                {successMessage && <h3 className="alert alert-success mt-3">{successMessage}</h3>}
                 <div className="row mb-5">
                     <div className="col-lg-6">
                         <h4>Event Title: {event.title}</h4>
@@ -82,10 +116,10 @@ class EventInfo extends React.Component {
                         )}
                         <p>Address: {event.address}</p>
 
-                        {loading && <div>Loading authentication status...</div>}
+                        {loadingAuthentication && <div>Loading authentication status...</div>}
 
                         {authenticated ? (
-                            <button className="btn btn-lg btn-primary">Sign Up</button>
+                            <button className="btn btn-lg btn-primary" onClick={this.signUp}>Sign Up</button>
                         ) : (
                             <h4>You must <a href="/login">log in</a> to sign up for this event.</h4>
                         )}
@@ -101,10 +135,6 @@ class EventInfo extends React.Component {
                         </div>
                     </div>
                 </div>
-                
-
-                
-
             </div>
         );
     }

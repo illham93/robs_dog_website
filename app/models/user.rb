@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :sessions
+  has_many :event_signups
+  has_many :signed_up_events, through: :event_signups, source: :event
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
