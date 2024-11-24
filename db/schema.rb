@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_21_215402) do
+ActiveRecord::Schema.define(version: 2024_11_24_192055) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 2024_11_21_215402) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "event_signups", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "event_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_event_signups_on_event_id"
+    t.index ["user_id", "event_id"], name: "index_event_signups_on_user_id_and_event_id", unique: true
+    t.index ["user_id"], name: "index_event_signups_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -94,5 +104,7 @@ ActiveRecord::Schema.define(version: 2024_11_21_215402) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "event_signups", "events"
+  add_foreign_key "event_signups", "users"
   add_foreign_key "sessions", "users"
 end
