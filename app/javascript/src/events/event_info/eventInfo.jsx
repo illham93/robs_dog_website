@@ -6,11 +6,14 @@ class EventInfo extends React.Component {
     state = {
         loading: true,
         loadingAuthentication: true,
+        loadingSignup: true,
         error: '',
         event: {},
         authenticated: false,
         user_id: '',
         successMessage: '',
+        signedUp: false,
+        checkedSignupStatus: false,
     }
 
     componentDidMount() {
@@ -58,6 +61,30 @@ class EventInfo extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const {user_id, event, checkedSignupStatus} = this.state;
+
+        if (user_id && event.id && !checkedSignupStatus) {
+            this.setState({ checkedSignupStatus: true});
+
+            fetch(`/api/event_signups/${user_id}/${event.id}`)
+            .then(handleErrors)
+            .then(data => {
+                console.log(data);
+                this.setState({
+                    loadingSignup: false,
+                    signedUp: data.signedUp,
+                });
+            })
+            .catch(error => {
+                this.setState({
+                    error: error.error || 'Error retrieving signed up status',
+                    loadingSignup: false,
+                });
+            })
+        }
+    }
+
     signUp = () => {
         const user_id = this.state.user_id;
         const event_id = this.state.event.id;
@@ -83,7 +110,7 @@ class EventInfo extends React.Component {
     }
 
     render () {
-        const {loading, loadingAuthentication, authenticated, error, event, successMessage} = this.state;
+        const {loading, loadingAuthentication, loadingSignup, authenticated, error, event, successMessage, signedUp} = this.state;
 
         if (loading) {
             return <h3>Loading...</h3>;
@@ -119,7 +146,15 @@ class EventInfo extends React.Component {
                         {loadingAuthentication && <div>Loading authentication status...</div>}
 
                         {authenticated ? (
-                            <button className="btn btn-lg btn-primary" onClick={this.signUp}>Sign Up</button>
+                            <>
+                                {loadingSignup && <div>Loading signed up status...</div>}
+
+                                {signedUp ? (
+                                    <h4>You are signed up for this event.</h4>
+                                ) : (
+                                    <button className="btn btn-lg btn-primary" onClick={this.signUp}>Sign Up</button>
+                                )}
+                            </>
                         ) : (
                             <h4>You must <a href="/login">log in</a> to sign up for this event.</h4>
                         )}
