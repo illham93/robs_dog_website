@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
         <Layout>
             <div className="container">
-                <h2 className="mt-5 mb-3 text-center">Event Info</h2>
+                <h2 className="mt-5 mb-5 text-center">Event Info</h2>
                 <EventInfo />
             </div>
         </Layout>,

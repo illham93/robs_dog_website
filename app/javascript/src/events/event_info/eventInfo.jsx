@@ -5,11 +5,30 @@ class EventInfo extends React.Component {
 
     state = {
         loading: true,
+        loadingAuthentication: true,
         error: '',
         event: {},
+        authenticated: false,
     }
 
     componentDidMount() {
+
+        fetch('/api/authenticated')
+            .then(handleErrors)
+            .then(data => {
+                this.setState({
+                    authenticated: data.authenticated,
+                    member: data.member,
+                    loadingAuthentication: false,
+                });
+            })
+            .catch(error => {
+                this.setState({
+                    error: error.error || 'Error authenticating user',
+                    loadingAuthentication: false,
+                });
+        });
+
         const url = window.location.pathname;
         const id = url.substring(url.lastIndexOf('/') + 1);
 
@@ -31,7 +50,7 @@ class EventInfo extends React.Component {
     }
 
     render () {
-        const {loading, error, event} = this.state;
+        const {loading, loadingAuthentication, authenticated, error, event} = this.state;
 
         if (loading) {
             return <h3>Loading...</h3>;
@@ -45,29 +64,47 @@ class EventInfo extends React.Component {
         const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(event.address)}`;
 
         return (
-            <div className="container">
-                <h4>Event Title: {event.title}</h4>
-                <h4>Description:</h4>
-                <h5>{event.description}</h5>
-                <h4>Date: {event.date}</h4>
-                <h4>Start Time: {event.start_time}</h4>
-                {event.end_time && (
-                    <h4>End Time: {event.end_time}</h4>
-                )}
-                {event.multi_day && (
-                    <h5>
-                        *This is part of a multi-day event
-                    </h5>
-                )}
-                <p>Address: {event.address}</p>
-                <iframe
-                    width='600'
-                    height='450'
-                    frameBorder='0'
-                    style={{ border: 0 }}
-                    src={googleMapsUrl}
-                    allowFullScreen
-                />
+            <div className="container rounded-grey-background text-shadow">
+                <div className="row mb-5">
+                    <div className="col-lg-6">
+                        <h4>Event Title: {event.title}</h4>
+                        <h4>Description:</h4>
+                        <h5>{event.description}</h5>
+                        <h4>Date: {event.date}</h4>
+                        <h4>Start Time: {event.start_time}</h4>
+                        {event.end_time && (
+                            <h4>End Time: {event.end_time}</h4>
+                        )}
+                        {event.multi_day && (
+                            <h5>
+                                *This is part of a multi-day event
+                            </h5>
+                        )}
+                        <p>Address: {event.address}</p>
+
+                        {loading && <div>Loading authentication status...</div>}
+
+                        {authenticated ? (
+                            <button className="btn btn-lg btn-primary">Sign Up</button>
+                        ) : (
+                            <h4>You must <a href="/login">log in</a> to sign up for this event.</h4>
+                        )}
+
+                    </div>
+                    <div className="col-lg-6">
+                        <div className="google-maps-container">
+                            <iframe
+                                style={{ border: 0 }}
+                                src={googleMapsUrl}
+                                allowFullScreen
+                            />
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+
             </div>
         );
     }

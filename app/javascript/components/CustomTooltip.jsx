@@ -46,8 +46,8 @@ const CustomTooltip = ({ event, children, includeLink }) => {
         >
             {children}
             {visible && ReactDOM.createPortal(
-            <div className="custom-tooltip" style={{ top: tooltipPosition.top, left: tooltipPosition.left }}>
-                <a className="text-white text-decoration-none" href={`/events/${event.id}`}>
+            <a className="text-white text-decoration-none" href={`/events/${event.id}`}>
+                <div className="custom-tooltip" style={{ top: tooltipPosition.top, left: tooltipPosition.left }}>
                     <div className="tooltip-content">
                         <p><strong>{event.title}</strong></p>
                         <p>{event.description}</p>
@@ -58,8 +58,8 @@ const CustomTooltip = ({ event, children, includeLink }) => {
                         <p>Location: {event.location}</p>
                         {event.multi_day && <p>*This is a multi-day event</p>}
                     </div>
-                </a>
-            </div>,
+                </div>
+            </a>,
                 document.body
             )}
         </div>
