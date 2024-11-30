@@ -22,7 +22,8 @@ class AdminEvents extends React.Component {
             location: '',
             address: '',
             multi_day: false,
-        }
+        },
+        usersSignedUp: [],
     }
 
     componentDidMount() {
@@ -129,6 +130,19 @@ class AdminEvents extends React.Component {
                 multi_day: event.multi_day || false,
             }
         });
+
+        fetch(`/api/event_signups_by_event/${event.id}`)
+        .then(handleErrors)
+        .then(data => {
+            console.log(data);
+            this.setState({
+                usersSignedUp: data,
+            });
+        })
+        .catch(error => {
+            console.error('Error: ', error)
+            this.setState({error: error.message || 'Error fetching signed up users'});
+        })
     }
 
     handleInputChange = (e) => {
@@ -142,7 +156,7 @@ class AdminEvents extends React.Component {
     }
 
     render() {
-        const {admin, loading, error, successMessage, selectedEvent, formValues} = this.state;
+        const {admin, loading, error, successMessage, selectedEvent, formValues, usersSignedUp} = this.state;
 
         return (
             <div className="container">
@@ -159,46 +173,65 @@ class AdminEvents extends React.Component {
                                 <h3>Edit event:</h3>
                                 { selectedEvent ? (
                                     <>
-                                        <div className="mb-3">
-                                            <label htmlFor="title" className="form-label">Title</label>
-                                            <input type="text" className="form-control mb-2" name="title" value={formValues.title} onChange={this.handleInputChange} required />
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <div className="mb-3">
+                                                    <label htmlFor="title" className="form-label">Title</label>
+                                                    <input type="text" className="form-control mb-2" name="title" value={formValues.title} onChange={this.handleInputChange} required />
 
-                                            <label htmlFor="description" className="form-label">Description</label>
-                                            <textarea type="text" className="form-control mb-2" name="description" value={formValues.description} onChange={this.handleInputChange} required />
+                                                    <label htmlFor="description" className="form-label">Description</label>
+                                                    <textarea type="text" className="form-control mb-2" name="description" value={formValues.description} onChange={this.handleInputChange} required />
 
-                                            <label htmlFor="date" className="form-label">Date</label>
-                                            <input type="date" className="form-control mb-2 date-time-input" name="date" value={formValues.date} onChange={this.handleInputChange} required />
+                                                    <label htmlFor="date" className="form-label">Date</label>
+                                                    <input type="date" className="form-control mb-2 date-time-input" name="date" value={formValues.date} onChange={this.handleInputChange} required />
 
-                                            <label htmlFor="start_time" className="form-label">Start Time</label>
-                                            <input type="time" className="form-control mb-2 date-time-input" name="start_time" value={formValues.start_time} onChange={this.handleInputChange} required />
+                                                    <label htmlFor="start_time" className="form-label">Start Time</label>
+                                                    <input type="time" className="form-control mb-2 date-time-input" name="start_time" value={formValues.start_time} onChange={this.handleInputChange} required />
 
-                                            <label htmlFor="end_time" className="form-label">End Time</label>
-                                            <input type="time" className="form-control mb-2 date-time-input" name="end_time" value={formValues.end_time} onChange={this.handleInputChange}
-                                            />
+                                                    <label htmlFor="end_time" className="form-label">End Time</label>
+                                                    <input type="time" className="form-control mb-2 date-time-input" name="end_time" value={formValues.end_time} onChange={this.handleInputChange}
+                                                    />
 
-                                            <label htmlFor="location" className="form-label">Location (This is just a short form that will be shown in the tooltip)</label>
-                                            <input type="text" className="form-control mb-2" name="location" value={formValues.location} onChange={this.handleInputChange} required />
+                                                    <label htmlFor="location" className="form-label">Location (This is just a short form that will be shown in the tooltip)</label>
+                                                    <input type="text" className="form-control mb-2" name="location" value={formValues.location} onChange={this.handleInputChange} required />
 
-                                            <label htmlFor="address" className="form-label">Address (This is the full address that will be used on the event info page)</label>
-                                            <input type="text" className="form-control mb-2" name="address" value={formValues.address} onChange={this.handleInputChange} required />
+                                                    <label htmlFor="address" className="form-label">Address (This is the full address that will be used on the event info page)</label>
+                                                    <input type="text" className="form-control mb-2" name="address" value={formValues.address} onChange={this.handleInputChange} required />
 
-                                            <label htmlFor="multi_day" className="form-label">Multi-day?</label>
-                                            <input type="checkbox" className="mb-2 ms-2" name="multi_day" checked={formValues.multi_day} onChange={this.handleInputChange} />
+                                                    <label htmlFor="multi_day" className="form-label">Multi-day?</label>
+                                                    <input type="checkbox" className="mb-2 ms-2" name="multi_day" checked={formValues.multi_day} onChange={this.handleInputChange} />
 
-                                            <br/>
-                                            <button className="btn btn-success" onClick={this.editEvent}>
-                                                Save <i className="fa-solid fa-floppy-disk"></i>
-                                            </button>
-                                            <button className="btn btn-danger ms-2" onClick={this.deleteEvent} >
-                                                Delete <i className="fa-solid fa-trash-can"></i>
-                                            </button>
+                                                    <br/>
+                                                    <button className="btn btn-success" onClick={this.editEvent}>
+                                                        Save <i className="fa-solid fa-floppy-disk"></i>
+                                                    </button>
+                                                    <button className="btn btn-danger ms-2" onClick={this.deleteEvent} >
+                                                        Delete <i className="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                </div>      
+                                            </div>
+                                            <div className="col-lg-6">
+                                                <h4>Users signed up for this event:</h4>
+                                                    {usersSignedUp.length > 0 ? (
+                                                        <ul>
+                                                            {usersSignedUp.map(user => (
+                                                                <li key={user.id}>
+                                                                    <h4>{user.user.email}</h4>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    ) : (
+                                                        <h5>No users have signed up for this event yet.</h5>
+                                                    )}
+                                            </div>
                                         </div>
+
                                     </>
                                 ) : (
                                     <p>Click on the event you wish to edit or delete</p>
                                 )}
 
-                                <h3>Add event:</h3>
+                                <h3>Add new event:</h3>
                                 <form onSubmit={(e) => this.addEvent(e)} className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
                                     <input type="text" className="form-control mb-2" name="title" required />

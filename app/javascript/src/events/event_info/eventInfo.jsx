@@ -181,7 +181,7 @@ class EventInfo extends React.Component {
                                         <button className="mt-2 btn btn-lg btn-danger" onClick={this.cancelSignUp}>Cancel sign up</button>
                                     </>
                                 ) : (
-                                    <button className="btn btn-lg btn-primary" onClick={this.signUp}>Sign Up</button>
+                                    <button className="btn btn-lg btn-primary mb-4" onClick={this.signUp}>Sign Up</button>
                                 )}
                             </>
                         ) : (

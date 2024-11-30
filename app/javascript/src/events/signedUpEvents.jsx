@@ -22,7 +22,7 @@ class SignedUpEvents extends React.Component {
                 loadingAuthentication: false,
             });
             // fetch request to get event signups
-            fetch(`/api/event_signups/${data.user_id}`)
+            fetch(`/api/event_signups_by_user/${data.user_id}`)
             .then(handleErrors)
             .then(data => {
                 console.log(data);

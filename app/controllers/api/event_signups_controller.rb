@@ -35,6 +35,15 @@ module Api
       render json: event_signups.as_json(include: {event: {only: [:id, :title, :date]}}), status: :ok
     end
 
+    def signups_by_event
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      users_signed_up = EventSignup.includes(:user).where(event_id: params[:event_id])
+      render json: users_signed_up.as_json(include: {user: {only: [:id, :email]}}), status: :ok
+    end
+
     private
 
     def event_signup_params
