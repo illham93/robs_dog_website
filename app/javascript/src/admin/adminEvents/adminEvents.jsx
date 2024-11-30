@@ -211,12 +211,12 @@ class AdminEvents extends React.Component {
                                                 </div>      
                                             </div>
                                             <div className="col-lg-6">
-                                                <h4>Users signed up for this event:</h4>
+                                                <h4>Users signed up for this event: {usersSignedUp.length}</h4>
                                                     {usersSignedUp.length > 0 ? (
                                                         <ul>
                                                             {usersSignedUp.map(user => (
                                                                 <li key={user.id}>
-                                                                    <h4>{user.user.email}</h4>
+                                                                    <h5>{user.user.email}</h5>
                                                                 </li>
                                                             ))}
                                                         </ul>
