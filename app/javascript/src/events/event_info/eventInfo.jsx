@@ -109,6 +109,32 @@ class EventInfo extends React.Component {
         })
     }
 
+    cancelSignUp = () => {
+        if (confirm('Are you sure you want to cancel registration for this event?')) {
+            const user_id = this.state.user_id;
+            const event_id = this.state.event.id;
+    
+            fetch(`/api/event_signups/${user_id}/${event_id}`, safeCredentials({
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'}
+            }))
+            .then(handleErrors)
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.setItem('successMessage', 'Canceled registration for event.');
+                    window.location.reload();
+                } else {
+                    console.error('Error cancelling sign up:', data);
+                    this.setState({error: data.error || 'Error cancelling registration'});
+                }
+            })
+            .catch(error => {
+                console.error('Error: ', error.error);
+                this.setState({error: error.error || 'Error cancelling registration'});
+            })
+        }
+    }
+
     render () {
         const {loading, loadingAuthentication, loadingSignup, authenticated, error, event, successMessage, signedUp} = this.state;
 
@@ -150,7 +176,10 @@ class EventInfo extends React.Component {
                                 {loadingSignup && <div>Loading signed up status...</div>}
 
                                 {signedUp ? (
-                                    <h4>You are signed up for this event.</h4>
+                                    <>
+                                        <h4>You are signed up for this event.</h4>
+                                        <button className="mt-2 btn btn-lg btn-danger" onClick={this.cancelSignUp}>Cancel sign up</button>
+                                    </>
                                 ) : (
                                     <button className="btn btn-lg btn-primary" onClick={this.signUp}>Sign Up</button>
                                 )}

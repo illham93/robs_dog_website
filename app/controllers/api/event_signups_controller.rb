@@ -20,6 +20,16 @@ module Api
       end
     end
 
+    def delete
+      event_signup = EventSignup.find_by(user_id: params[:user_id], event_id: params[:event_id])
+      if event_signup
+        event_signup.destroy
+        render json: {success: true}, status: :ok
+      else
+        render json: {error: 'Event signup not found'}, status: :not_found
+      end
+    end
+
     private
 
     def event_signup_params
