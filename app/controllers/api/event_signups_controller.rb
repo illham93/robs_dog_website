@@ -30,6 +30,11 @@ module Api
       end
     end
 
+    def signups_by_user
+      event_signups = EventSignup.includes(:event).where(user_id: params[:user_id])
+      render json: event_signups.as_json(include: {event: {only: [:id, :title, :date]}}), status: :ok
+    end
+
     private
 
     def event_signup_params
