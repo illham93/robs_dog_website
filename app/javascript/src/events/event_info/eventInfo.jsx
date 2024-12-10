@@ -136,7 +136,12 @@ class EventInfo extends React.Component {
     }
 
     render () {
-        const {loading, loadingAuthentication, loadingSignup, authenticated, error, event, successMessage, signedUp} = this.state;
+        const {loading, loadingAuthentication, loadingSignup, authenticated, error, event, successMessage, signedUp} = this.state; 
+        let eventIsInFuture = false;
+
+        if (new Date(event.date) >= new Date()) {
+            eventIsInFuture = true;
+        };
 
         if (loading) {
             return <h3>Loading...</h3>;
@@ -172,23 +177,26 @@ class EventInfo extends React.Component {
 
                         {loadingAuthentication && <div>Loading authentication status...</div>}
 
-                        {authenticated ? (
+                        {eventIsInFuture && (
                             <>
-                                {loadingSignup && <div>Loading signed up status...</div>}
-
-                                {signedUp ? (
+                                {authenticated ? (
                                     <>
-                                        <h4>You are signed up for this event.</h4>
-                                        <button className="mt-2 btn btn-lg btn-danger" onClick={this.cancelSignUp}>Cancel sign up</button>
+                                        {loadingSignup && <div>Loading signed up status...</div>}
+
+                                        {signedUp ? (
+                                            <>
+                                                <h4>You are signed up for this event.</h4>
+                                                <button className="mt-2 btn btn-lg btn-danger" onClick={this.cancelSignUp}>Cancel sign up</button>
+                                            </>
+                                        ) : (
+                                            <button className="btn btn-lg btn-primary mb-4" onClick={this.signUp}>Sign Up</button>
+                                        )}
                                     </>
                                 ) : (
-                                    <button className="btn btn-lg btn-primary mb-4" onClick={this.signUp}>Sign Up</button>
+                                    <h4>You must <a href="/login">log in</a> to sign up for this event.</h4>
                                 )}
                             </>
-                        ) : (
-                            <h4>You must <a href="/login">log in</a> to sign up for this event.</h4>
                         )}
-
                     </div>
                     <div className="col-lg-6">
                         <div className="google-maps-container">
