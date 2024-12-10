@@ -23,6 +23,7 @@ class AdminEvents extends React.Component {
             address: '',
             multi_day: false,
             notes: '',
+            members_only: false,
         },
         usersSignedUp: [],
     }
@@ -130,6 +131,7 @@ class AdminEvents extends React.Component {
                 address: event.address,
                 multi_day: event.multi_day || false,
                 notes: event.notes,
+                members_only: event.members_only || false,
             }
         });
 
@@ -203,8 +205,11 @@ class AdminEvents extends React.Component {
                                                     <label htmlFor="notes" className="form-label">Additional notes</label>
                                                     <input type="text" className="form-control mb-2" name="notes" value={formValues.notes} onChange={this.handleInputChange}/>
 
-                                                    <label htmlFor="multi_day" className="form-label">Multi-day?</label>
+                                                    <label htmlFor="multi_day" className="form-label">Multi-day</label>
                                                     <input type="checkbox" className="mb-2 ms-2" name="multi_day" checked={formValues.multi_day} onChange={this.handleInputChange} />
+
+                                                    <label htmlFor="members_only" className="form-label ms-4">Members only</label>
+                                                    <input type="checkbox" className="mb-2 ms-2" name="members_only" checked={formValues.members_only} onChange={this.handleInputChange} />
 
                                                     <br/>
                                                     <button className="btn btn-success" onClick={this.editEvent}>
@@ -262,8 +267,11 @@ class AdminEvents extends React.Component {
                                     <label htmlFor="notes" className="form-label">Additional notes</label>
                                     <input type="text" className="form-control mb-2" name="notes" />
 
-                                    <label htmlFor="multi_day" className="form-label">Multi-day?</label>
+                                    <label htmlFor="multi_day" className="form-label">Multi-day</label>
                                     <input type="checkbox" className="mb-2 ms-2" name="multi_day" />
+
+                                    <label htmlFor="members_only" className="form-label ms-4">Members only</label>
+                                    <input type="checkbox" className="mb-2 ms-2" name="members_only" />
 
                                     <br/>
                                     <button className="btn btn-success" type="submit">
