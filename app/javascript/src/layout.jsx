@@ -98,6 +98,21 @@ const Layout = (props) => {
                 </div>
             </nav>
             {props.children}
+            <footer className="text-white mt-5 p-4 text-center">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-4">
+                            <h5>Quick links:</h5>
+                        </div>
+                        <div className="col-sm-4">
+                            <h5>Contact:</h5>
+                        </div>
+                        <div className="col-sm-4">
+                            <h5>Social Media:</h5>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </React.Fragment>
     );
 }
