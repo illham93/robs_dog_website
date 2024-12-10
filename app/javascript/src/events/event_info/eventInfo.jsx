@@ -167,7 +167,8 @@ class EventInfo extends React.Component {
                                 *This is part of a multi-day event
                             </h5>
                         )}
-                        <p>Address: {event.address}</p>
+                        <h4>Address: {event.address}</h4>
+                        <p>Additional notes: {event.notes}</p>
 
                         {loadingAuthentication && <div>Loading authentication status...</div>}
 

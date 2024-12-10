@@ -22,6 +22,7 @@ class AdminEvents extends React.Component {
             location: '',
             address: '',
             multi_day: false,
+            notes: '',
         },
         usersSignedUp: [],
     }
@@ -128,6 +129,7 @@ class AdminEvents extends React.Component {
                 location: event.location,
                 address: event.address,
                 multi_day: event.multi_day || false,
+                notes: event.notes,
             }
         });
 
@@ -198,6 +200,9 @@ class AdminEvents extends React.Component {
                                                     <label htmlFor="address" className="form-label">Address (This is the full address that will be used on the event info page)</label>
                                                     <input type="text" className="form-control mb-2" name="address" value={formValues.address} onChange={this.handleInputChange} required />
 
+                                                    <label htmlFor="notes" className="form-label">Additional notes</label>
+                                                    <input type="text" className="form-control mb-2" name="notes" value={formValues.notes} onChange={this.handleInputChange}/>
+
                                                     <label htmlFor="multi_day" className="form-label">Multi-day?</label>
                                                     <input type="checkbox" className="mb-2 ms-2" name="multi_day" checked={formValues.multi_day} onChange={this.handleInputChange} />
 
@@ -253,6 +258,9 @@ class AdminEvents extends React.Component {
 
                                     <label htmlFor="address" className="form-label">Address (This is the full address that will be used on the event info page)</label>
                                     <input type="text" className="form-control mb-2" name="address" required />
+
+                                    <label htmlFor="notes" className="form-label">Additional notes</label>
+                                    <input type="text" className="form-control mb-2" name="notes" />
 
                                     <label htmlFor="multi_day" className="form-label">Multi-day?</label>
                                     <input type="checkbox" className="mb-2 ms-2" name="multi_day" />

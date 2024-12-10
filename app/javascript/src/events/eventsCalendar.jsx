@@ -59,7 +59,8 @@ class EventsCalendar extends React.Component {
                         address: event.address,
                         start: new Date(year, month - 1, day, startHour, startMinute),
                         end: new Date(year, month - 1, day, endHour, endMinute),
-                        multi_day: event.multi_day
+                        multi_day: event.multi_day,
+                        notes: event.notes
                     };
                 }).filter(event => event !== null); // remove null entries
                 console.log(events);
