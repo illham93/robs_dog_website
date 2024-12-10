@@ -7,6 +7,8 @@ class SignupWidget extends React.Component {
         email: '',
         password: '',
         passwordConfirm: '',
+        first_name: '',
+        last_name: '',
         error: '',
     }
 
@@ -32,6 +34,8 @@ class SignupWidget extends React.Component {
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
             })
         }))
             .then(handleErrors)
@@ -78,10 +82,12 @@ class SignupWidget extends React.Component {
     }
 
     render () {
-        const {email, password, passwordConfirm, error} = this.state;
+        const {email, password, passwordConfirm, first_name, last_name, error} = this.state;
         return (
             <React.Fragment>
                 <form onSubmit={this.signup}>
+                    <input name="first_name" type="text" className="form-control form-control-lg mb-3" placeholder="First Name" value={first_name} onChange={this.handleChange} required />
+                    <input name="last_name" type="text" className="form-control form-control-lg mb-3" placeholder="Last Name" value={last_name} onChange={this.handleChange} required />
                     <input name="email" type="text" className="form-control form-control-lg mb-3" placeholder="Email" value={email} onChange={this.handleChange} required />
                     <input name="password" type="password" className="form-control form-control-lg mb-3" placeholder="Password" value={password} onChange={this.handleChange} required />
                     <input name="passwordConfirm" type="password" className="form-control form-control-lg mb-3" placeholder="Confirm Password" value={passwordConfirm} onChange={this.handleChange} required />

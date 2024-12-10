@@ -221,7 +221,7 @@ class AdminEvents extends React.Component {
                                                         <ul>
                                                             {usersSignedUp.map(user => (
                                                                 <li key={user.id}>
-                                                                    <h5>{user.user.email}</h5>
+                                                                    <h5>{user.user.first_name} {user.user.last_name} ({user.user.email})</h5>
                                                                 </li>
                                                             ))}
                                                         </ul>
