@@ -2,6 +2,19 @@ module Api
   class DogOfTheMonthController < ApplicationController
     before_action :authenticate_user!, only: [:update, :create]
 
+    def index
+      @dogs = DogOfTheMonth.order(date: :desc)
+      if @dogs
+        dogs_with_images = @dogs.map do |dog|
+          image_url = dog.image.attached? ? url_for(dog.image) : nil
+          dog.as_json.merge(image_url: image_url)
+        end
+        render json: {dogs: dogs_with_images}, status: :ok
+      else
+        render json: {error: 'dogs not found'}, status: :not_found
+      end
+    end
+
     def show
       dog = DogOfTheMonth.last
       if dog

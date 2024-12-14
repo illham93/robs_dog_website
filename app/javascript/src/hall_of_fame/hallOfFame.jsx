@@ -12,7 +12,7 @@ class HallOfFame extends React.Component {
         const {dogs, loading, error} = this.state;
 
         return (
-            <div>This is the hall of fame</div>
+            <div>Under development</div>
         );
     }
 }
