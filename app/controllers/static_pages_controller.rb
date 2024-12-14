@@ -14,6 +14,10 @@ class StaticPagesController < ApplicationController
   def event_info
     render 'event_info'
   end
+
+  def hall_of_fame
+    render 'hall_of_fame'
+  end
   
   def login
     render 'login'

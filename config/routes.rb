@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/members' => 'static_pages#members'
   get '/events' => 'static_pages#events'
   get '/events/:id' => 'static_pages#event_info'
+  get '/hall_of_fame' => 'static_pages#hall_of_fame'
   
   # Admin
   get '/admin/home' => 'static_pages#admin_home'

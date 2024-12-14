@@ -1,0 +1,1 @@
+import 'src/hall_of_fame';

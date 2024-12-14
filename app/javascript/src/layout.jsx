@@ -68,12 +68,9 @@ const Layout = (props) => {
                             <li className="nav-item">
                                 <a className="nav-link text-white" href="/events">Events</a>
                             </li>
-                            {/*<li className="nav-item">
-                                <a className="nav-link text-white" href="/">Events</a>
-                            </li>
                             <li className="nav-item">
-                                <a className="nav-link text-white" href="/">Merch</a>
-                            </li> */}
+                                <a className="nav-link text-white" href="/hall_of_fame">Hall of Fame</a>
+                            </li>
                         </ul>
                         <ul className="navbar-nav ms-auto">
                             {admin && (
