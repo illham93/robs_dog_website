@@ -9,7 +9,7 @@ class DogOfTheMonth extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/api/dog-of-the-month')
+        fetch('/api/show-dog-of-the-month')
             .then(handleErrors)
             .then(data => {
                 console.log(data);

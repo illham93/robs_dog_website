@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     delete '/announcements/:id' => 'announcements#destroy'
 
     #dog of the month
-    get '/dog-of-the-month' => 'dog_of_the_month#index'
+    get '/show-dog-of-the-month' => 'dog_of_the_month#show'
     post '/dog-of-the-month' => 'dog_of_the_month#create'
     put '/dog-of-the-month' => 'dog_of_the_month#update'
 

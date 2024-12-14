@@ -2,8 +2,8 @@ module Api
   class DogOfTheMonthController < ApplicationController
     before_action :authenticate_user!, only: [:update, :create]
 
-    def index
-      dog = DogOfTheMonth.first
+    def show
+      dog = DogOfTheMonth.last
       if dog
         image_url = dog.image.attached? ? url_for(dog.image) : nil
         render json: {

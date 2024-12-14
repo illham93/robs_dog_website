@@ -8,11 +8,13 @@ class AdminHallOfFame extends React.Component {
         error: '',
     }
 
+    
+
     render() {
         const {dogs, loading, error} = this.state;
 
         return (
-            <div>This is the hall of fame</div>
+            <h3 className="text-center">Past dogs of the month</h3>
         );
     }
 }
