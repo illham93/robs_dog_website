@@ -62,8 +62,8 @@ class AddDogOfTheMonth extends React.Component {
                         <>
                             <form encType="multipart/form-data" onSubmit={this.save}>
                                 <div className="d-flex justify-content-end">
-                                    <button className="btn btn-success" type="submit">
-                                        <i className="fa-regular fa-floppy-disk"></i>
+                                    <button className="btn btn-success" type="submit" title="Submit">
+                                        <i className="fa-solid fa-check"></i>
                                     </button>
                                 </div>
                                 <p>Image: <input id="image-select" type="file" name="image" accept="image/*" /></p>

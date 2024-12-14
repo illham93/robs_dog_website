@@ -45,6 +45,15 @@ class AdminHallOfFame extends React.Component {
                                 <div className="rounded-grey-background mt-3 mb-3">
                                     <div className="row">
                                         <div className="col-md-6">
+                                            <button className="btn btn-success me-2 mb-2" title="Make Current">
+                                                <i className="fa-solid fa-check"></i>
+                                            </button>
+                                            <button className="btn btn-primary me-2 mb-2" title="Edit">
+                                                <i className="fa-solid fa-pencil"></i>
+                                            </button>
+                                            <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, announcement.id)}>
+                                                <i className="fa-solid fa-trash-can"></i>
+                                            </button> 
                                             <h5>Registered name: {dog.registered_name}</h5>
                                             <h5>Call name: {dog.call_name}</h5>
                                             <h5>Owner: {dog.owner}</h5>

@@ -39,7 +39,6 @@ class AdminHome extends React.Component {
                     <>
                         <h1 className="text-center m-5">Admin Home</h1>
                         <EditAnnouncements />
-                        <EditDogOfTheMonth />
                     </>
                 ) : (
                     <h3 className="text-center mt-5">You are not authorized to be here</h3>
