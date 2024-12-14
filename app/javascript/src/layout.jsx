@@ -80,6 +80,7 @@ const Layout = (props) => {
                                         <a className="dropdown-item" href="/admin/home">Home</a>
                                         <a className="dropdown-item" href="/admin/members">Members</a>
                                         <a className="dropdown-item" href="/admin/events">Events</a>
+                                        <a className="dropdown-item" href="/admin/hall_of_fame">Hall of Fame</a>
                                     </div>
                                 </li>
                             )}

@@ -35,4 +35,8 @@ class StaticPagesController < ApplicationController
   def admin_events
     render 'admin_events'
   end
+
+  def admin_hall_of_fame
+    render 'admin_hall_of_fame'
+  end
 end
