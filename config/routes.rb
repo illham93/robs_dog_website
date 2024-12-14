@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
     #dog of the month
     get '/dog-of-the-month' => 'dog_of_the_month#index'
+    post '/dog-of-the-month' => 'dog_of_the_month#create'
     put '/dog-of-the-month' => 'dog_of_the_month#update'
 
     #users

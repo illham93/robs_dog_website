@@ -1,6 +1,6 @@
 module Api
   class DogOfTheMonthController < ApplicationController
-    before_action :authenticate_user!, only: [:update]
+    before_action :authenticate_user!, only: [:update, :create]
 
     def index
       dog = DogOfTheMonth.first
@@ -11,6 +11,19 @@ module Api
         }, status: :ok
       else
         render json: {error: 'Dog of the month not found'}, status: :not_found
+      end
+    end
+
+    def create
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      @dog_of_the_month = DogOfTheMonth.new(dog_params)
+      if @dog_of_the_month.save
+        render json: {success: true}
+      else
+        render json: {error: "Error adding dog of the month"}, status: :unprocessable_entity
       end
     end
 
