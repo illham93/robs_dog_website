@@ -52,7 +52,6 @@ class AddDogOfTheMonth extends React.Component {
         return (
             <div className="container">
                 <h3 className="text-center mt-5 mb-3">Add new Dog of the Month</h3>
-                <p className="text-center">This also sets it as the current dog of the month. You can edit the active dog of the month below.</p>
 
                 {successMessage && <h3 className="alert alert-success mt-3">{successMessage}</h3>}
                 {error ? (
