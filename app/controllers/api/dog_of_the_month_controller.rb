@@ -3,7 +3,7 @@ module Api
     before_action :authenticate_user!, only: [:update, :create, :destroy, :make_current]
 
     def index
-      @dogs = DogOfTheMonth.order(date: :desc)
+      @dogs = DogOfTheMonth.order(year_month: :desc)
       if @dogs
         dogs_with_images = @dogs.map do |dog|
           image_url = dog.image.attached? ? url_for(dog.image) : nil
