@@ -67,20 +67,26 @@ class AddDogOfTheMonth extends React.Component {
                                     </button>
                                 </div>
                                 <p>Image: <input id="image-select" type="file" name="image" accept="image/*" /></p>
-                                <p>Call name:<input className="form-control" name="call_name"/></p>
-                                <p>Registered name:<input className="form-control" name="registered_name"/></p>
-                                <p>Titles:<input className="form-control" name="titles"/></p>
-                                <p>Owner:<input className="form-control" name="owner"/></p>
-                                <p>About:<textarea className="form-control" name="about"/></p>
+                                <p>Call name:<input className="form-control" name="call_name" required/></p>
+                                <p>Registered name:<input className="form-control" name="registered_name" required/></p>
+                                <p>Titles:<input className="form-control" name="titles" required/></p>
+                                <p>Owner:<input className="form-control" name="owner" required/></p>
+                                <p>About:<textarea className="form-control" name="about" required/></p>
                                 <div className="row">
                                     <div className="col-6">
-                                        <p>Year:<input className="form-control" type="number" defaultValue={new Date().getFullYear()} /></p>
-                                    </div>
-                                    <div className="col-6">
-                                        <p>Month:<input className="form-control" type="month" defaultValue={new Date().getMonth()}/></p>
+                                        <p>
+                                            Year and month:
+                                            <input 
+                                                className="form-control" 
+                                                type="month" 
+                                                defaultValue={`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`} 
+                                                name="year_month"
+                                                required
+                                            />
+                                        </p>
                                     </div>
                                 </div>
-                                
+                                <p>Make current? <input type="checkbox" name="current"/></p>
                             </form>
                         </>
                     </div>

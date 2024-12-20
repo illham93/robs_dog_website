@@ -32,6 +32,10 @@ module Api
         return render json: {error: 'Unauthorized'}, status: :forbidden
       end
 
+      if dog_params[:current]
+        DogOfTheMonth.where(current: true).update_all(current: false)
+      end
+
       @dog_of_the_month = DogOfTheMonth.new(dog_params)
       if @dog_of_the_month.save
         render json: {success: true}
@@ -75,7 +79,7 @@ module Api
     private
 
     def dog_params
-      params.permit(:call_name, :registered_name, :titles, :owner, :about, :image)
+      params.permit(:call_name, :registered_name, :titles, :owner, :about, :image, :year_month, :current)
     end
 
   end
