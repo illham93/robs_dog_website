@@ -8,7 +8,7 @@ class EditAnnouncements extends React.Component {
         editId: null,
         error: '',
         loading: true,
-        successMessage,
+        successMessage: '',
     }
 
     componentDidMount() {
