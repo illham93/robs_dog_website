@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get '/dog-of-the-month' => 'dog_of_the_month#index'
     get '/show-dog-of-the-month' => 'dog_of_the_month#show'
     post '/dog-of-the-month' => 'dog_of_the_month#create'
-    put '/dog-of-the-month' => 'dog_of_the_month#update'
+    put '/dog-of-the-month/:id' => 'dog_of_the_month#update'
 
     #users
     get '/users' => 'users#index'

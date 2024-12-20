@@ -45,7 +45,7 @@ module Api
         return render json: {error: 'Unauthorized'}, status: :forbidden
       end
 
-      dog = DogOfTheMonth.first
+      dog = DogOfTheMonth.find(params[:id])
 
       if params[:image]
         dog.image.attach(params[:image])

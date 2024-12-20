@@ -8,9 +8,16 @@ class EditAnnouncements extends React.Component {
         editId: null,
         error: '',
         loading: true,
+        successMessage,
     }
 
     componentDidMount() {
+        const successMessage = sessionStorage.getItem('successMessage');
+        if (successMessage) {
+            this.setState({ successMessage });
+            sessionStorage.removeItem('successMessage');
+        }
+
         fetch('/api/announcements')
             .then(handleErrors)
             .then(data => {

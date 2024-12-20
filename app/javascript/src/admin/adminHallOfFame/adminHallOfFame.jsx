@@ -1,5 +1,5 @@
 import React from "react";
-import { handleErrors } from "../../utils/fetchHelper";
+import { handleErrors, safeCredentialsFormData } from "../../utils/fetchHelper";
 
 class AdminHallOfFame extends React.Component {
 
@@ -7,6 +7,7 @@ class AdminHallOfFame extends React.Component {
         dogs: [],
         loading: true,
         error: '',
+        editId: null,
     }
 
     componentDidMount() {
@@ -27,8 +28,43 @@ class AdminHallOfFame extends React.Component {
             });
     }
 
+    edit(e, id) {
+        e.preventDefault();
+        this.setState({ editId: id });
+    }
+
+    save = (e, id) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const image = document.getElementById('image-select').files[0];
+
+        if (image) {
+            formData.append('image', image);
+        }
+
+        fetch(`/api/dog-of-the-month/${id}`, safeCredentialsFormData({
+            method: 'PUT',
+            body: formData,
+        }))
+        .then(handleErrors)
+        .then(data => {
+            if (data.success) {
+                sessionStorage.setItem('successMessage', 'Dog of the month updated successfully');
+                window.location.reload();
+                console.log('Dog updated successfully', data);
+            } else {
+                console.error('Error updating dog', data);
+                this.setState({ error: error.error || 'Error updating dog'});
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            this.setState({ error: error.error || 'Error updating dog'});
+        })
+    }
+
     render() {
-        const {dogs, loading, error} = this.state;
+        const {dogs, loading, error, successMessage} = this.state;
 
         return (
             <div className="container">
@@ -36,36 +72,99 @@ class AdminHallOfFame extends React.Component {
 
                 {loading && <h3>Loading...</h3>}
 
+                {successMessage && <h3 className="alert alert-success mt-3">{successMessage}</h3>}
+
                 {error ? (
                     <h3 className="text-danger mt-2">Error: {error}</h3>
                 ) : (
                     <>
                         {dogs.map(dog => {
                             return (
-                                <div className="rounded-grey-background mt-3 mb-3">
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <button className="btn btn-success me-2 mb-2" title="Make Current">
-                                                <i className="fa-solid fa-check"></i>
-                                            </button>
-                                            <button className="btn btn-primary me-2 mb-2" title="Edit">
-                                                <i className="fa-solid fa-pencil"></i>
-                                            </button>
-                                            <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, announcement.id)}>
-                                                <i className="fa-solid fa-trash-can"></i>
-                                            </button> 
-                                            <h5>Registered name: {dog.registered_name}</h5>
-                                            <h5>Call name: {dog.call_name}</h5>
-                                            <h5>Owner: {dog.owner}</h5>
-                                            <h5>Titles: {dog.titles}</h5>
-                                            <h5>About:</h5>
-                                            <h5>{dog.about}</h5>
-                                        </div>
-                                        <div className="col-md-6 text-end">
-                                            <img className="admin-dog-of-the-month-image" src={dog.image_url}></img>
-                                        </div>
+                                <form onSubmit={(e) => this.save(e, dog.id)} key={dog.id}>
+                                    <div className="rounded-grey-background mt-3 mb-3">
+                                        {this.state.editId === dog.id ? (
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <button className="btn btn-success me-2 mb-2" title="Make Current">
+                                                        <i className="fa-solid fa-check"></i>
+                                                    </button>
+                                                    <button className="btn btn-primary me-2 mb-2" type="submit" title="Save">
+                                                        <i className="fa-regular fa-floppy-disk"></i>
+                                                    </button>
+                                                    <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, announcement.id)}>
+                                                        <i className="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                    <h5>Registered name: </h5>
+                                                    <input 
+                                                        className="form-control mb-2"
+                                                        defaultValue={dog.registered_name}
+                                                        name="registered_name"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <h5>Call name: </h5>
+                                                    <input 
+                                                        className="form-control mb-2"
+                                                        defaultValue={dog.call_name}
+                                                        name="call_name"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <h5>Owner: </h5>
+                                                    <input 
+                                                        className="form-control mb-2"
+                                                        defaultValue={dog.owner}
+                                                        name="owner"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <h5>Titles: </h5>
+                                                    <input 
+                                                        className="form-control mb-2"
+                                                        defaultValue={dog.titles}
+                                                        name="titles"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <h5>About:</h5>
+                                                    <textarea 
+                                                        className="form-control mb-2"
+                                                        defaultValue={dog.about}
+                                                        name="about"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="col-md-6 d-flex align-items-center justify-content-center">
+                                                    <p>Image: <input id="image-select" type="file" name="image" accept="image/*" /></p>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <button className="btn btn-success me-2 mb-2" title="Make Current">
+                                                        <i className="fa-solid fa-check"></i>
+                                                    </button>
+                                                    <button className="btn btn-primary me-2 mb-2" onClick={(e) => this.edit(e, dog.id)} title="Edit">
+                                                        <i className="fa-solid fa-pencil"></i>
+                                                    </button>
+                                                    <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, announcement.id)}>
+                                                        <i className="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                    <h5>Registered name: {dog.registered_name}</h5>
+                                                    <h5>Call name: {dog.call_name}</h5>
+                                                    <h5>Owner: {dog.owner}</h5>
+                                                    <h5>Titles: {dog.titles}</h5>
+                                                    <h5>About:</h5>
+                                                    <h5>{dog.about}</h5>
+                                                </div>
+                                                <div className="col-md-6 text-end">
+                                                    <img className="admin-dog-of-the-month-image" src={dog.image_url}></img>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                </div>
+                                </form>
                             )
                         })}
                     </>
