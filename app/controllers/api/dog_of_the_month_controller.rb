@@ -16,7 +16,7 @@ module Api
     end
 
     def show
-      dog = DogOfTheMonth.last
+      dog = DogOfTheMonth.find_by(current: true)
       if dog
         image_url = dog.image.attached? ? url_for(dog.image) : nil
         render json: {
