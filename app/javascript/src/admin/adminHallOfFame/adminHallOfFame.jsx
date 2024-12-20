@@ -1,5 +1,5 @@
 import React from "react";
-import { handleErrors, safeCredentialsFormData } from "../../utils/fetchHelper";
+import { handleErrors, safeCredentials, safeCredentialsFormData } from "../../utils/fetchHelper";
 
 class AdminHallOfFame extends React.Component {
 
@@ -63,6 +63,30 @@ class AdminHallOfFame extends React.Component {
         })
     }
 
+    delete(e, id) {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete this dog of the month?')) {
+            fetch(`/api/dog-of-the-month/${id}`, safeCredentials({
+                method: 'DELETE',
+            }))
+            .then(handleErrors)
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.setItem('successMessage', 'Dog of the month deleted successfully');
+                    window.location.reload();
+                } else {
+                    console.error('Error deleting dog', data);
+                    this.setState({ error: error.error || 'Error deleting dog'});
+                }
+            })
+            .catch(error => {
+                this.setState({
+                    error: error.error || 'Could not delete dog of the month'
+                });
+            });
+        };
+    }
+
     render() {
         const {dogs, loading, error, successMessage} = this.state;
 
@@ -91,7 +115,7 @@ class AdminHallOfFame extends React.Component {
                                                     <button className="btn btn-primary me-2 mb-2" type="submit" title="Save">
                                                         <i className="fa-regular fa-floppy-disk"></i>
                                                     </button>
-                                                    <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, announcement.id)}>
+                                                    <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, dog.id)}>
                                                         <i className="fa-solid fa-trash-can"></i>
                                                     </button>
                                                     <h5>Registered name: </h5>
@@ -148,7 +172,7 @@ class AdminHallOfFame extends React.Component {
                                                     <button className="btn btn-primary me-2 mb-2" onClick={(e) => this.edit(e, dog.id)} title="Edit">
                                                         <i className="fa-solid fa-pencil"></i>
                                                     </button>
-                                                    <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, announcement.id)}>
+                                                    <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, dog.id)}>
                                                         <i className="fa-solid fa-trash-can"></i>
                                                     </button>
                                                     <h5>Registered name: {dog.registered_name}</h5>

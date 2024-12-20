@@ -1,6 +1,6 @@
 module Api
   class DogOfTheMonthController < ApplicationController
-    before_action :authenticate_user!, only: [:update, :create]
+    before_action :authenticate_user!, only: [:update, :create, :destroy]
 
     def index
       @dogs = DogOfTheMonth.order(date: :desc)
@@ -55,6 +55,20 @@ module Api
         render json: {success: true}
       else
         render json: {error: "Could not update dog of the month"}, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      dog = DogOfTheMonth.find(params[:id])
+      if dog
+        dog.destroy
+        render json: {success: true}
+      else
+        render json: {error: "Dog not found"}, status: :not_found
       end
     end
 
