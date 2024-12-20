@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     post '/dog-of-the-month' => 'dog_of_the_month#create'
     put '/dog-of-the-month/:id' => 'dog_of_the_month#update'
     delete '/dog-of-the-month/:id' => 'dog_of_the_month#destroy'
+    put '/dog-of-the-month/:id/make-current' => 'dog_of_the_month#make_current'
 
     #users
     get '/users' => 'users#index'

@@ -87,6 +87,28 @@ class AdminHallOfFame extends React.Component {
         };
     }
 
+    makeCurrent(e, id) {
+        e.preventDefault();
+        if (confirm('Are you sure you want to make this the current dog of the month?')) {
+            fetch(`/api/dog-of-the-month/${id}/make-current`, safeCredentials({
+                method: 'PUT',
+            }))
+            .then(handleErrors)
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.setItem('successMessage', 'Successfully updated current dog of the month');
+                    window.location.reload();
+                } else {
+                    console.error('Error updating current dog of the month', data);
+                    this.setState({error: error.error || 'Error updating current dog of the month'})
+                }
+            })
+            .catch(error => {
+                this.setState({ error: error.error || 'Error updating current dog of the month'})
+            });
+        }
+    }
+
     render() {
         const {dogs, loading, error, successMessage} = this.state;
 
@@ -109,9 +131,15 @@ class AdminHallOfFame extends React.Component {
                                         {this.state.editId === dog.id ? (
                                             <div className="row">
                                                 <div className="col-md-6">
-                                                    <button className="btn btn-success me-2 mb-2" title="Make Current">
-                                                        <i className="fa-solid fa-check"></i>
-                                                    </button>
+                                                    {dog.current ? (
+                                                        <button className="btn btn-warning me-2 mb-2 disabled-button" title="Current Dog of the Month" onClick={(e) => e.preventDefault()}>
+                                                            <i class="fa-solid fa-star"></i>
+                                                        </button>
+                                                    ) : (
+                                                        <button className="btn btn-success me-2 mb-2" onClick={(e) => this.makeCurrent(e, dog.id)} title="Make Current">
+                                                            <i className="fa-solid fa-check"></i>
+                                                        </button>
+                                                    )}
                                                     <button className="btn btn-primary me-2 mb-2" type="submit" title="Save">
                                                         <i className="fa-regular fa-floppy-disk"></i>
                                                     </button>
@@ -166,9 +194,15 @@ class AdminHallOfFame extends React.Component {
                                         ) : (
                                             <div className="row">
                                                 <div className="col-md-6">
-                                                    <button className="btn btn-success me-2 mb-2" title="Make Current">
-                                                        <i className="fa-solid fa-check"></i>
-                                                    </button>
+                                                    {dog.current ? (
+                                                        <button className="btn btn-warning me-2 mb-2 disabled-button" title="Current Dog of the Month" onClick={(e) => e.preventDefault()}>
+                                                            <i class="fa-solid fa-star"></i>
+                                                        </button>
+                                                    ) : (
+                                                        <button className="btn btn-success me-2 mb-2" onClick={(e) => this.makeCurrent(e, dog.id)} title="Make Current">
+                                                            <i className="fa-solid fa-check"></i>
+                                                        </button>
+                                                    )}
                                                     <button className="btn btn-primary me-2 mb-2" onClick={(e) => this.edit(e, dog.id)} title="Edit">
                                                         <i className="fa-solid fa-pencil"></i>
                                                     </button>
