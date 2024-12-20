@@ -72,20 +72,16 @@ class AddDogOfTheMonth extends React.Component {
                                 <p>Titles:<input className="form-control" name="titles" required/></p>
                                 <p>Owner:<input className="form-control" name="owner" required/></p>
                                 <p>About:<textarea className="form-control" name="about" required/></p>
-                                <div className="row">
-                                    <div className="col-6">
-                                        <p>
-                                            Year and month:
-                                            <input 
-                                                className="form-control" 
-                                                type="month" 
-                                                defaultValue={`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`} 
-                                                name="year_month"
-                                                required
-                                            />
-                                        </p>
-                                    </div>
-                                </div>
+                                <p>
+                                    Year and month:
+                                    <input 
+                                        className="form-control" 
+                                        type="month" 
+                                        defaultValue={`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`} 
+                                        name="year_month"
+                                        required
+                                    />
+                                </p>
                                 <p>Make current? <input type="checkbox" name="current"/></p>
                             </form>
                         </>

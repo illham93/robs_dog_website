@@ -133,7 +133,7 @@ class AdminHallOfFame extends React.Component {
                                                 <div className="col-md-6">
                                                     {dog.current ? (
                                                         <button className="btn btn-warning me-2 mb-2 disabled-button" title="Current Dog of the Month" onClick={(e) => e.preventDefault()}>
-                                                            <i class="fa-solid fa-star"></i>
+                                                            <i className="fa-solid fa-star"></i>
                                                         </button>
                                                     ) : (
                                                         <button className="btn btn-success me-2 mb-2" onClick={(e) => this.makeCurrent(e, dog.id)} title="Make Current">
@@ -186,6 +186,16 @@ class AdminHallOfFame extends React.Component {
                                                         type="text"
                                                         required
                                                     />
+                                                    <p>
+                                                        Year and month:
+                                                        <input 
+                                                            className="form-control" 
+                                                            type="month" 
+                                                            defaultValue={`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`} 
+                                                            name="year_month"
+                                                            required
+                                                        />
+                                                    </p>
                                                 </div>
                                                 <div className="col-md-6 d-flex align-items-center justify-content-center">
                                                     <p>Image: <input id="image-select" type="file" name="image" accept="image/*" /></p>
@@ -196,7 +206,7 @@ class AdminHallOfFame extends React.Component {
                                                 <div className="col-md-6">
                                                     {dog.current ? (
                                                         <button className="btn btn-warning me-2 mb-2 disabled-button" title="Current Dog of the Month" onClick={(e) => e.preventDefault()}>
-                                                            <i class="fa-solid fa-star"></i>
+                                                            <i className="fa-solid fa-star"></i>
                                                         </button>
                                                     ) : (
                                                         <button className="btn btn-success me-2 mb-2" onClick={(e) => this.makeCurrent(e, dog.id)} title="Make Current">
@@ -215,6 +225,7 @@ class AdminHallOfFame extends React.Component {
                                                     <h5>Titles: {dog.titles}</h5>
                                                     <h5>About:</h5>
                                                     <h5>{dog.about}</h5>
+                                                    <h5>Year and month: {new Date(`${dog.year_month}-01T00:00:00`).toLocaleString('default', { month: 'short', year: 'numeric' })}</h5>
                                                 </div>
                                                 <div className="col-md-6 text-end">
                                                     <img className="admin-dog-of-the-month-image" src={dog.image_url}></img>
