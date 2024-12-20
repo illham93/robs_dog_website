@@ -56,8 +56,7 @@ ActiveRecord::Schema.define(version: 2024_12_20_193131) do
     t.string "owner"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "year"
-    t.integer "month"
+    t.string "year_month"
     t.boolean "current"
   end
 

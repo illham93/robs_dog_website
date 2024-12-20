@@ -72,6 +72,15 @@ class AddDogOfTheMonth extends React.Component {
                                 <p>Titles:<input className="form-control" name="titles"/></p>
                                 <p>Owner:<input className="form-control" name="owner"/></p>
                                 <p>About:<textarea className="form-control" name="about"/></p>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <p>Year:<input className="form-control" type="number" defaultValue={new Date().getFullYear()} /></p>
+                                    </div>
+                                    <div className="col-6">
+                                        <p>Month:<input className="form-control" type="month" defaultValue={new Date().getMonth()}/></p>
+                                    </div>
+                                </div>
+                                
                             </form>
                         </>
                     </div>
