@@ -9,7 +9,7 @@ class AdminSponsors extends React.Component {
 
     render () {
         return (
-            <div>under development</div>
+            <h4 className="text-center">Add sponsor:</h4>
         )
     }
 }
