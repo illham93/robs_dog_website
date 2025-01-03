@@ -3,6 +3,10 @@ class StaticPagesController < ApplicationController
     render 'home'
   end
 
+  def about
+    render 'about'
+  end
+
   def members
     render 'members'
   end
