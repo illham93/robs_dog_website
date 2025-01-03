@@ -43,20 +43,23 @@ class Sponsors extends React.Component {
                 ) : (
                     <>
                         <div>
-                            {categoryOrder.map(category => (
-                                <div key={category} className="rounded-grey-background mt-3 text-center">
-                                    <h3>{category}</h3>
-                                    {sponsors.filter(sponsor => sponsor.category === category)
-                                    .map(sponsor => (
-                                        <div key={sponsor.id} className="d-inline-block text-center m-2">
-                                            <a href={sponsor.url} className="text-decoration-none text-white">
-                                                <img className="sponsor-image" src={sponsor.image_url} />
-                                                <h5>{sponsor.title}</h5>
-                                            </a>
-                                        </div>
-                                    ))}
-                                </div>
-                            ))}
+                            {categoryOrder.map(category => {
+                                const categorySponsors = sponsors.filter(sponsor => sponsor.category === category);
+                                if (categorySponsors.length === 0) return null;
+                                return (
+                                    <div key={category} className="rounded-grey-background mt-4 text-center">
+                                        <h3 className="text-underline">{category}</h3>
+                                        {categorySponsors.map(sponsor => (
+                                            <div key={sponsor.id} className="d-inline-block text-center m-2">
+                                                <a href={sponsor.url} className="text-decoration-none text-white">
+                                                    <img className="sponsor-image mb-2" src={sponsor.image_url} alt={sponsor.title} />
+                                                    <h5>{sponsor.title}</h5>
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
+                                );
+                            })}
                         </div>
                     </>
                 )}
