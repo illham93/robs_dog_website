@@ -81,6 +81,7 @@ const Layout = (props) => {
                                     <a className="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                                     <div className="dropdown-menu" aria-labelledby="adminDropdown">
                                         <a className="dropdown-item" href="/admin/home">Home</a>
+                                        <a className="dropdown-item" href="/admin/about">About</a>
                                         <a className="dropdown-item" href="/admin/members">Members</a>
                                         <a className="dropdown-item" href="/admin/events">Events</a>
                                         <a className="dropdown-item" href="/admin/hall_of_fame">Hall of Fame</a>

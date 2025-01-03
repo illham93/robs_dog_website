@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   
   # Admin
   get '/admin/home' => 'static_pages#admin_home'
+  get '/admin/about' => 'static_pages#admin_about'
   get '/admin/members' => 'static_pages#admin_members'
   get '/admin/events' => 'static_pages#admin_events'
   get '/admin/hall_of_fame' => 'static_pages#admin_hall_of_fame'
