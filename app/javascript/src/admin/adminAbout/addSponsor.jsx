@@ -66,13 +66,13 @@ class AddSponsor extends React.Component {
                                     </button>
                                 </div>
                                 <p>Image: 
-                                    <input id="image-select" className="ms-1" type="file" name="image" accept="image/*" />
+                                    <input id="image-select" className="ms-1" type="file" name="image" accept="image/*" required/>
                                 </p>
                                 <p>Title: 
                                     <input className="form-control" name="title" required />
                                 </p>
                                 <p>URL: 
-                                    <input className="form-control" name="url" />
+                                    <input className="form-control" name="url" placeholder="Link (Optional) *Include the full URL that starts with https://" />
                                 </p>
                                 <p>Category:
                                     <select className="form-select" name="category" defaultValue="" required>

@@ -3,6 +3,19 @@ module Api
 
     before_action :authenticate_user!, only: [:create]
 
+    def index
+      sponsors = Sponsor.all
+      if sponsors
+        sponsors_with_images = sponsors.map do |sponsor|
+          image_url = sponsor.image.attached? ? url_for(sponsor.image) : nil
+          sponsor.as_json.merge(image_url: image_url)
+        end
+        render json: {sponsors: sponsors_with_images}, status: :ok
+      else
+        render json: {error: 'Sponsors not found'}, status: :not_found
+      end
+    end
+
     def create
       unless @user.admin?
         return render json: {error: 'Unauthorized'}, status: :forbidden

@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     get '/event_signups_by_event/:event_id' => 'event_signups#signups_by_event'
 
     #sponsors
+    get '/sponsors' => 'sponsors#index'
     post '/sponsors' => 'sponsors#create'
   end
 end
