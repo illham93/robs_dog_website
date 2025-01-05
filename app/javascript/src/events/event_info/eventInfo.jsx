@@ -189,7 +189,8 @@ class EventInfo extends React.Component {
                                             </>
                                         ) : (
                                             <>
-                                                <h5>*This is a members only event</h5>
+                                                {event.members_only && <h5>*This is a members only event</h5>}
+                                                
                                                 {loadingSignup && <div>Loading signed up status...</div>}
 
                                                 {signedUp ? (

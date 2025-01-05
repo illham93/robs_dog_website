@@ -119,8 +119,8 @@ const Layout = (props) => {
                         </div>
                         <div className="col-sm-4">
                             <h5>Social Media:</h5>
-                            <a className="text-white me-2 fs-4" href="https://www.facebook.com/share/15ggjkwkQP/?mibextid=wwXIfr" target="blank"><i class="fa-brands fa-facebook"></i></a>
-                            <a className="text-white me-2 fs-4" href="https://www.instagram.com/lakeontariohrc/?hl=en" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                            <a className="text-white me-2 fs-4" href="https://www.facebook.com/share/15ggjkwkQP/?mibextid=wwXIfr" target="blank"><i className="fa-brands fa-facebook"></i></a>
+                            <a className="text-white me-2 fs-4" href="https://www.instagram.com/lakeontariohrc/?hl=en" target="blank"><i className="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
