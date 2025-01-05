@@ -5,7 +5,7 @@ module Api
     def show
       event_signup = EventSignup.find_by(user_id: params[:user_id], event_id: params[:event_id])
       if event_signup
-        render json: {signedUp: true}, status: :ok
+        render json: {signedUp: true, event_signup: event_signup}, status: :ok
       else
         render json: {signedUp: false}, status: :ok
       end

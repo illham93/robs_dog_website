@@ -15,6 +15,7 @@ class EventInfo extends React.Component {
         signedUp: false,
         checkedSignupStatus: false,
         member: false,
+        status: '',
     }
 
     componentDidMount() {
@@ -75,7 +76,12 @@ class EventInfo extends React.Component {
                 this.setState({
                     loadingSignup: false,
                     signedUp: data.signedUp,
-                });
+                })
+                if (data.signedUp) {
+                    this.setState({
+                        status: data.event_signup.status,
+                    })
+                }
             })
             .catch(error => {
                 this.setState({
@@ -137,7 +143,7 @@ class EventInfo extends React.Component {
     }
 
     render () {
-        const {loading, loadingAuthentication, loadingSignup, authenticated, error, event, successMessage, signedUp, member} = this.state; 
+        const {loading, loadingAuthentication, loadingSignup, authenticated, error, event, successMessage, signedUp, member, status} = this.state; 
         let eventIsInFuture = false;
 
         if (new Date(event.date) >= new Date()) {
@@ -195,7 +201,11 @@ class EventInfo extends React.Component {
 
                                                 {signedUp ? (
                                                     <>
-                                                        <h4>You are signed up for this event.</h4>
+                                                        {status === 'registered' ? (
+                                                            <h4>You are signed up for this event.</h4>
+                                                        ) : (
+                                                            <h4>Your registration for this event is pending</h4>
+                                                        )}
                                                         <button className="mt-2 btn btn-lg btn-danger" onClick={this.cancelSignUp}>Cancel sign up</button>
                                                     </>
                                                 ) : (
