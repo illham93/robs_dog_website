@@ -1,7 +1,7 @@
 module Api
   class SponsorsController < ApplicationController
 
-    before_action :authenticate_user!, only: [:create, :delete]
+    before_action :authenticate_user!, only: [:create, :delete, :update]
 
     def index
       sponsors = Sponsor.all
@@ -26,6 +26,24 @@ module Api
         render json: {success: true, sponsor: @sponsor}, status: :created
       else
         render json: {error: @sponsor.errors.full_messages}, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      sponsor = Sponsor.find(params[:id])
+
+      if params[:image]
+        sponsor.image.attach(params[:image])
+      end
+
+      if sponsor.update(sponsor_params)
+        render json: {success: true}, status: :ok
+      else
+        render json: {error: "Could not update sponsor"}, status: :unprocessable_entity
       end
     end
 

@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     #sponsors
     get '/sponsors' => 'sponsors#index'
     post '/sponsors' => 'sponsors#create'
+    put '/sponsors/:id' => 'sponsors#update'
     delete '/sponsors/:id' => 'sponsors#delete'
   end
 end
