@@ -105,12 +105,22 @@ const Layout = (props) => {
                     <div className="row">
                         <div className="col-sm-4">
                             <h5>Quick links:</h5>
+                            <ul className="list-unstyled">
+                                <li><a className="text-white" href="/">Home</a></li>
+                                <li><a className="text-white" href="/about">About</a></li>
+                                <li><a className="text-white" href="/members">Members</a></li>
+                                <li><a className="text-white" href="/events">Events</a></li>
+                                <li><a className="text-white" href="/hall_of_fame">Hall of Fame</a></li>
+                            </ul>
                         </div>
                         <div className="col-sm-4">
                             <h5>Contact:</h5>
+                            <p className="fs-5">lakeontariohrc@outlook.com</p>
                         </div>
                         <div className="col-sm-4">
                             <h5>Social Media:</h5>
+                            <a className="text-white me-2 fs-4" href="https://www.facebook.com/share/15ggjkwkQP/?mibextid=wwXIfr" target="blank"><i class="fa-brands fa-facebook"></i></a>
+                            <a className="text-white me-2 fs-4" href="https://www.instagram.com/lakeontariohrc/?hl=en" target="blank"><i class="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
