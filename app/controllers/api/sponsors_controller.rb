@@ -1,7 +1,7 @@
 module Api
   class SponsorsController < ApplicationController
 
-    before_action :authenticate_user!, only: [:create]
+    before_action :authenticate_user!, only: [:create, :delete]
 
     def index
       sponsors = Sponsor.all
@@ -26,6 +26,20 @@ module Api
         render json: {success: true, sponsor: @sponsor}, status: :created
       else
         render json: {error: @sponsor.errors.full_messages}, status: :unprocessable_entity
+      end
+    end
+
+    def delete
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      sponsor = Sponsor.find(params[:id])
+      if sponsor
+        sponsor.destroy
+        render json: {success: true}, status: :ok
+      else
+        render json: {error: "Sponsor not found"}, status: :not_found
       end
     end
 
