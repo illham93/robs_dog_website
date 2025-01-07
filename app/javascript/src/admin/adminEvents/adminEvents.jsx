@@ -162,28 +162,34 @@ class AdminEvents extends React.Component {
     }
 
     approve = (id) => {
-        fetch(`/api/event_signups/approve/${id}`, safeCredentials({
-            method: 'PUT',
-        }))
-        .then(handleErrors)
-        .then(data => {
-            if (data.success) {
-                sessionStorage.setItem('successMessage', 'Registration approved');
-                window.location.reload();
-                console.log('Registration approved', data);
-            } else {
-                console.error('Error approving registration', data);
-                this.setState({error: data.error || 'Error approving registration'});
-            }
-        })
-        .catch(error => {
-            console.error('Error: ', error);
-            this.setState({error: error.error || 'Error approving registration'});
-        })
+        if (confirm('Are you sure you want to approve this event registration?')) {
+            fetch(`/api/event_signups/approve/${id}`, safeCredentials({
+                method: 'PUT',
+            }))
+            .then(handleErrors)
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.setItem('successMessage', 'Registration approved');
+                    window.location.reload();
+                    console.log('Registration approved', data);
+                } else {
+                    console.error('Error approving registration', data);
+                    this.setState({error: data.error || 'Error approving registration'});
+                }
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+                this.setState({error: error.error || 'Error approving registration'});
+            })
+        }
     }
 
     render() {
         const {admin, loading, error, successMessage, selectedEvent, formValues, usersSignedUp} = this.state;
+
+        // filter users based on status
+        const pendingUsers = usersSignedUp.filter(user => user.status === 'pending');
+        const registeredUsers = usersSignedUp.filter(user => user.status === 'registered');
 
         return (
             <div className="container">
@@ -247,20 +253,26 @@ class AdminEvents extends React.Component {
                                                 </div>      
                                             </div>
                                             <div className="col-lg-6">
-                                                <h4>Users signed up for this event: {usersSignedUp.length}</h4>
-                                                <p>Click the check mark to approve registration</p>
-                                                    {usersSignedUp.length > 0 ? (
-                                                        <ul>
-                                                            {usersSignedUp.map(user => (
-                                                                <li key={user.id}>
-                                                                    <h5 className="d-inline me-2">{user.user.first_name} {user.user.last_name} ({user.user.email})</h5>
-                                                                    <button className="btn btn-sm btn-success" title="Approve" onClick={() => this.approve(user.id)}><i className="fa-solid fa-check"></i></button>
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    ) : (
-                                                        <h5>No users have signed up for this event yet.</h5>
-                                                    )}
+
+                                                <h4>Users <span className="text-warning">pending registration</span> for this event: {pendingUsers.length}</h4>
+                                                {pendingUsers.length > 0 && <p>Click the check mark to approve registration</p>}                                                 
+                                                <ul>
+                                                    {pendingUsers.map(user => (
+                                                        <li key={user.id}>
+                                                            <h5 className="d-inline me-2">{user.user.first_name} {user.user.last_name} ({user.user.email})</h5>
+                                                            <button className="btn btn-sm btn-success" title="Approve" onClick={() => this.approve(user.id)}><i className="fa-solid fa-check"></i></button>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+
+                                                <h4>Users registered for this event: {registeredUsers.length}</h4>
+                                                <ul>
+                                                    {registeredUsers.map(user => (
+                                                        <li key={user.id}>
+                                                            <h5 className="d-inline me-2">{user.user.first_name} {user.user.last_name} ({user.user.email})</h5>
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                         </div>
 
