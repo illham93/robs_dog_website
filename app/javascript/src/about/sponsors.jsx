@@ -34,7 +34,7 @@ class Sponsors extends React.Component {
 
         return (
             <div>
-                <h3 className="text-center">Thank you to our generous sponsors!</h3>
+                <h3 className="text-center mb-4">Thank you to our generous sponsors!</h3>
                 
                 {loading && <h3>Loading...</h3>}
 

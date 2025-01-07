@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
         <Layout>
             <div className="container">
-                <h2 className="mt-5 mb-3 text-center">About Us</h2>
                 <About />
                 <Sponsors />
             </div>
