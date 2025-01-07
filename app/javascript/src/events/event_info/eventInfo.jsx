@@ -103,7 +103,7 @@ class EventInfo extends React.Component {
         .then(handleErrors)
         .then (data => {
             if (data.success) {
-                sessionStorage.setItem('successMessage', 'Signed up for event!');
+                sessionStorage.setItem('successMessage', 'Signed up for event, clink the link below to complete registration');
                 window.location.reload();
             } else {
                 console.error('Error signing up for event', data);

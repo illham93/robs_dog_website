@@ -62,6 +62,7 @@ class EventsCalendar extends React.Component {
                         multi_day: event.multi_day,
                         notes: event.notes,
                         members_only: event.members_only,
+                        registration_link: event.registration_link,
                     };
                 }).filter(event => event !== null); // remove null entries
                 console.log(events);

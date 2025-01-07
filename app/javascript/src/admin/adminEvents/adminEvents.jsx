@@ -24,6 +24,7 @@ class AdminEvents extends React.Component {
             multi_day: false,
             notes: '',
             members_only: false,
+            registration_link: '',
         },
         usersSignedUp: [],
     }
@@ -132,6 +133,7 @@ class AdminEvents extends React.Component {
                 multi_day: event.multi_day || false,
                 notes: event.notes,
                 members_only: event.members_only || false,
+                registration_link: event.registration_link,
             }
         });
 
@@ -205,6 +207,9 @@ class AdminEvents extends React.Component {
                                                     <label htmlFor="notes" className="form-label">Additional notes</label>
                                                     <input type="text" className="form-control mb-2" name="notes" value={formValues.notes} onChange={this.handleInputChange}/>
 
+                                                    <label htmlFor="registration_link" className="form-label">Registration Link</label>
+                                                    <input type="url" className="form-control mb-2" name="registration_link" value={formValues.registration_link} onChange={this.handleInputChange} />
+
                                                     <label htmlFor="multi_day" className="form-label">Multi-day</label>
                                                     <input type="checkbox" className="mb-2 ms-2" name="multi_day" checked={formValues.multi_day} onChange={this.handleInputChange} />
 
@@ -266,6 +271,9 @@ class AdminEvents extends React.Component {
 
                                     <label htmlFor="notes" className="form-label">Additional notes</label>
                                     <input type="text" className="form-control mb-2" name="notes" />
+
+                                    <label htmlFor="registration_link" className="form-label">Registration Link</label>
+                                    <input type="url" className="form-control mb-2" name="registration_link" placeholder="Include the full URL that starts with https://"/>
 
                                     <label htmlFor="multi_day" className="form-label">Multi-day</label>
                                     <input type="checkbox" className="mb-2 ms-2" name="multi_day" />
