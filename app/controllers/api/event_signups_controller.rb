@@ -2,6 +2,24 @@ module Api
   class EventSignupsController < ApplicationController
     before_action :authenticate_user!
 
+    def approve_registration
+      unless @user.admin?
+        return render json: {error: 'Unauthorized'}, status: :forbidden
+      end
+
+      event_signup = EventSignup::find(params[:id])
+
+      unless event_signup
+        return render json: {error: 'User has not signed up for that event'}, status: :not_found
+      end
+
+      if event_signup.update(status: 'registered')
+        render json: {success: true}, status: :ok
+      else
+        render json: {error: 'Could not approve registration'}, status: :unprocessable_entity
+      end
+    end
+
     def show
       event_signup = EventSignup.find_by(user_id: params[:user_id], event_id: params[:event_id])
       if event_signup

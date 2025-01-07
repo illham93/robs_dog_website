@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     delete '/event_signups/:user_id/:event_id' => 'event_signups#delete'
     get '/event_signups_by_user/:user_id' => 'event_signups#signups_by_user'
     get '/event_signups_by_event/:event_id' => 'event_signups#signups_by_event'
+    put '/event_signups/approve/:id/' => 'event_signups#approve_registration'
 
     #sponsors
     get '/sponsors' => 'sponsors#index'

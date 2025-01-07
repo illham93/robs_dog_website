@@ -204,7 +204,10 @@ class EventInfo extends React.Component {
                                                         {status === 'registered' ? (
                                                             <h4>You are signed up for this event.</h4>
                                                         ) : (
-                                                            <h4>Your registration for this event is pending</h4>
+                                                            <>
+                                                                <h4>Registration status: <span className="text-warning">pending</span></h4>
+                                                                <h5>Click <a href={event.registration_link} target="blank">here</a> to complete registration:</h5>
+                                                            </>
                                                         )}
                                                         <button className="mt-2 btn btn-lg btn-danger" onClick={this.cancelSignUp}>Cancel sign up</button>
                                                     </>

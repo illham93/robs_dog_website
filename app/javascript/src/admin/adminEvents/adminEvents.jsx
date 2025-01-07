@@ -161,6 +161,27 @@ class AdminEvents extends React.Component {
         }))
     }
 
+    approve = (id) => {
+        fetch(`/api/event_signups/approve/${id}`, safeCredentials({
+            method: 'PUT',
+        }))
+        .then(handleErrors)
+        .then(data => {
+            if (data.success) {
+                sessionStorage.setItem('successMessage', 'Registration approved');
+                window.location.reload();
+                console.log('Registration approved', data);
+            } else {
+                console.error('Error approving registration', data);
+                this.setState({error: data.error || 'Error approving registration'});
+            }
+        })
+        .catch(error => {
+            console.error('Error: ', error);
+            this.setState({error: error.error || 'Error approving registration'});
+        })
+    }
+
     render() {
         const {admin, loading, error, successMessage, selectedEvent, formValues, usersSignedUp} = this.state;
 
@@ -227,11 +248,13 @@ class AdminEvents extends React.Component {
                                             </div>
                                             <div className="col-lg-6">
                                                 <h4>Users signed up for this event: {usersSignedUp.length}</h4>
+                                                <p>Click the check mark to approve registration</p>
                                                     {usersSignedUp.length > 0 ? (
                                                         <ul>
                                                             {usersSignedUp.map(user => (
                                                                 <li key={user.id}>
-                                                                    <h5>{user.user.first_name} {user.user.last_name} ({user.user.email})</h5>
+                                                                    <h5 className="d-inline me-2">{user.user.first_name} {user.user.last_name} ({user.user.email})</h5>
+                                                                    <button className="btn btn-sm btn-success" title="Approve" onClick={() => this.approve(user.id)}><i className="fa-solid fa-check"></i></button>
                                                                 </li>
                                                             ))}
                                                         </ul>
