@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Your registration is confirmed!</h1>
+    <p>Dear <%= @user.first_name %>,</p>
+    <p>Your registration for the event "<%= @event.title %>" has been approved.</p>
+    <p>Event Date: <%= @event.date %></p>
+    <p>Thank you for registering!</p>
+  </body>
+</html>

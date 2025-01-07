@@ -14,6 +14,7 @@ module Api
       end
 
       if event_signup.update(status: 'registered')
+        UserMailer.event_registration_approved(event_signup.user, event_signup.event).deliver_later
         render json: {success: true}, status: :ok
       else
         render json: {error: 'Could not approve registration'}, status: :unprocessable_entity
