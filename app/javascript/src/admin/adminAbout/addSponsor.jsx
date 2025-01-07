@@ -77,11 +77,11 @@ class AddSponsor extends React.Component {
                                 <p>Category:
                                     <select className="form-select" name="category" defaultValue="" required>
                                         <option value="" disabled>Select</option>
-                                        <option value="Puppy">Puppy</option>
-                                        <option value="Gun Dog">Gun Dog</option>
+                                        <option value="Started Hunting Retriever">Started Hunting Retriever</option>
                                         <option value="Hunting Retriever">Hunting Retriever</option>
                                         <option value="Hunting Retriever Champion">Hunting Retriever Champion</option>
                                         <option value="Grand Hunting Retriever Champion">Grand Hunting Retriever Champion</option>
+                                        <option value="Hall of Fame">Hall of Fame</option>
                                     </select>
                                 </p>
                             </form>

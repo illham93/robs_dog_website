@@ -137,11 +137,11 @@ class EditSponsor extends React.Component {
                                                         <h5 className="me-2">Category:</h5>
                                                         <select className="form-select flex-fill" name="category" defaultValue={sponsor.category} required>
                                                             <option value="" disabled>Select</option>
-                                                            <option value="Puppy">Puppy</option>
-                                                            <option value="Gun Dog">Gun Dog</option>
+                                                            <option value="Started Hunting Retriever">Started Hunting Retriever</option>
                                                             <option value="Hunting Retriever">Hunting Retriever</option>
                                                             <option value="Hunting Retriever Champion">Hunting Retriever Champion</option>
                                                             <option value="Grand Hunting Retriever Champion">Grand Hunting Retriever Champion</option>
+                                                            <option value="Hall of Fame">Hall of Fame</option>
                                                         </select>
                                                     </div>
 

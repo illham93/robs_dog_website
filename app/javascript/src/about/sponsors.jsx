@@ -30,7 +30,7 @@ class Sponsors extends React.Component {
         const {loading, error, sponsors} = this.state;
 
         // Sort the sponsors by category
-        const categoryOrder = ["Grand Hunting Retriever Champion", "Hunting Retriever Champion", "Hunting Retriever", "Gun Dog", "Puppy"];
+        const categoryOrder = ["Hall of Fame", "Grand Hunting Retriever Champion", "Hunting Retriever Champion", "Hunting Retriever", "Started Hunting Retriever"];
 
         return (
             <div>
