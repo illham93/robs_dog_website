@@ -30,6 +30,8 @@ class Announcements extends React.Component {
     render () {
         const { announcements, error, loading } = this.state;
 
+        const publicAnnouncements = announcements.filter(announcement => !announcement.members_only);
+
         return (
             <div className="container">
                 <h1 className="text-center mt-5 mb-5">Announcements</h1>
@@ -40,7 +42,7 @@ class Announcements extends React.Component {
                     <h3 className="text-danger mt-2">Error: {error}</h3>
                 ) : (
                     <div className="row">
-                        {announcements.map(announcement => {
+                        {publicAnnouncements.map(announcement => {
                             const dateTime = new Date(announcement.created_at);
                             const date = dateTime.toLocaleDateString();
                             return (   

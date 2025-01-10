@@ -45,6 +45,7 @@ class EditAnnouncements extends React.Component {
                 title: form.get('title'),
                 content: form.get('content'),
                 link: form.get('link'),
+                members_only: form.get('members_only'),
             })
         }))
         .then(handleErrors)
@@ -214,6 +215,8 @@ class EditAnnouncements extends React.Component {
                                     className="form-control"
                                     name="link"
                                     placeholder="Link (Optional) *Include the full URL that starts with https://" />
+                                <label htmlFor="members_only" className="form-label ms-1">Members only</label>
+                                <input type="checkbox" className="mb-2 ms-2 mt-3" name="members_only" />
                             </div>
                         </form>
                     </div>
