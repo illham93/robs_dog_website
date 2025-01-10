@@ -1,5 +1,6 @@
 import React from "react";
 import { handleErrors } from "../utils/fetchHelper";
+import SignedUpEvents from "../events/signedUpEvents";
 
 class MembersArea extends React.Component {
     state = {
@@ -66,6 +67,8 @@ class MembersArea extends React.Component {
                         )}
                     </>
                 )}
+                <hr className="mt-5 white-horizontal-line"/>
+                <SignedUpEvents />
             </div>
         )
     }

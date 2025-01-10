@@ -39,3 +39,10 @@ body {
 .text-underline {
     text-decoration: underline;
 }
+
+.white-horizontal-line {
+    border: 0;
+    height: 2px;
+    background: white;
+    margin: 20px 0;
+}
