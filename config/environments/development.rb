@@ -41,14 +41,14 @@ Rails.application.configure do
   # Set the delivery method to :smtp
   config.action_mailer.delivery_method = :smtp
 
-  # SMTP settings for Gmail
+  # SMTP settings for Outlook
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
+    address:              'smtp.outlook.com',
     port:                 587,
-    domain:               'example.com',
-    user_name:            '<your_email>@gmail.com',
-    password:             '<your_password>',
-    authentication:       'plain',
+    domain:               'outlook.com',
+    user_name:            ENV['OUTLOOK_USERNAME'],
+    password:             ENV['OUTLOOK_PASSWORD'],
+    authentication:       'login',
     enable_starttls_auto: true
   }
 
