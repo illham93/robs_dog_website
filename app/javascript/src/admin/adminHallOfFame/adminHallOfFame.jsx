@@ -8,9 +8,25 @@ class AdminHallOfFame extends React.Component {
         loading: true,
         error: '',
         editId: null,
+        admin: false,
     }
 
     componentDidMount() {
+        fetch('/api/authenticated')
+        .then(handleErrors)
+        .then(data => {
+            if (data.admin) {
+                this.setState({
+                    admin: true,
+                })
+            }
+        })
+        .catch(error => {
+            this.setState({
+                error: error.error || 'Error authenticating user'
+            });
+        });
+
         fetch('/api/dog-of-the-month')
             .then(handleErrors)
             .then(data => {
@@ -110,136 +126,139 @@ class AdminHallOfFame extends React.Component {
     }
 
     render() {
-        const {dogs, loading, error, successMessage} = this.state;
+        const {dogs, loading, error, successMessage, admin} = this.state;
 
         return (
-            <div className="container">
-                <h3 className="text-center">Past dogs of the month</h3>
+            <>
+                {admin && (
+                    <div className="container">
+                        <h3 className="text-center">Past dogs of the month</h3>
 
-                {loading && <h3>Loading...</h3>}
+                        {loading && <h3>Loading...</h3>}
 
-                {successMessage && <h3 className="alert alert-success mt-3">{successMessage}</h3>}
+                        {successMessage && <h3 className="alert alert-success mt-3">{successMessage}</h3>}
 
-                {error ? (
-                    <h3 className="text-danger mt-2">Error: {error}</h3>
-                ) : (
-                    <>
-                        {dogs.map(dog => {
-                            return (
-                                <form onSubmit={(e) => this.save(e, dog.id)} key={dog.id}>
-                                    <div className="rounded-grey-background mt-3 mb-3">
-                                        {this.state.editId === dog.id ? (
-                                            <div className="row">
-                                                <div className="col-md-6">
-                                                    {dog.current ? (
-                                                        <button className="btn btn-warning me-2 mb-2 disabled-button" title="Current Dog of the Month" onClick={(e) => e.preventDefault()}>
-                                                            <i className="fa-solid fa-star"></i>
-                                                        </button>
-                                                    ) : (
-                                                        <button className="btn btn-success me-2 mb-2" onClick={(e) => this.makeCurrent(e, dog.id)} title="Make Current">
-                                                            <i className="fa-solid fa-check"></i>
-                                                        </button>
-                                                    )}
-                                                    <button className="btn btn-primary me-2 mb-2" type="submit" title="Save">
-                                                        <i className="fa-regular fa-floppy-disk"></i>
-                                                    </button>
-                                                    <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, dog.id)}>
-                                                        <i className="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                    <h5>Registered name: </h5>
-                                                    <input 
-                                                        className="form-control mb-2"
-                                                        defaultValue={dog.registered_name}
-                                                        name="registered_name"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <h5>Call name: </h5>
-                                                    <input 
-                                                        className="form-control mb-2"
-                                                        defaultValue={dog.call_name}
-                                                        name="call_name"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <h5>Owner: </h5>
-                                                    <input 
-                                                        className="form-control mb-2"
-                                                        defaultValue={dog.owner}
-                                                        name="owner"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <h5>Titles: </h5>
-                                                    <input 
-                                                        className="form-control mb-2"
-                                                        defaultValue={dog.titles}
-                                                        name="titles"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <h5>About:</h5>
-                                                    <textarea 
-                                                        className="form-control mb-2"
-                                                        defaultValue={dog.about}
-                                                        name="about"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <p>
-                                                        Year and month:
-                                                        <input 
-                                                            className="form-control" 
-                                                            type="month" 
-                                                            defaultValue={`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`} 
-                                                            name="year_month"
-                                                            required
-                                                        />
-                                                    </p>
-                                                </div>
-                                                <div className="col-md-6 d-flex align-items-center justify-content-center">
-                                                    <p>Image: <input id="image-select" type="file" name="image" accept="image/*" /></p>
-                                                </div>
+                        {error ? (
+                            <h3 className="text-danger mt-2">Error: {error}</h3>
+                        ) : (
+                            <>
+                                {dogs.map(dog => {
+                                    return (
+                                        <form onSubmit={(e) => this.save(e, dog.id)} key={dog.id}>
+                                            <div className="rounded-grey-background mt-3 mb-3">
+                                                {this.state.editId === dog.id ? (
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            {dog.current ? (
+                                                                <button className="btn btn-warning me-2 mb-2 disabled-button" title="Current Dog of the Month" onClick={(e) => e.preventDefault()}>
+                                                                    <i className="fa-solid fa-star"></i>
+                                                                </button>
+                                                            ) : (
+                                                                <button className="btn btn-success me-2 mb-2" onClick={(e) => this.makeCurrent(e, dog.id)} title="Make Current">
+                                                                    <i className="fa-solid fa-check"></i>
+                                                                </button>
+                                                            )}
+                                                            <button className="btn btn-primary me-2 mb-2" type="submit" title="Save">
+                                                                <i className="fa-regular fa-floppy-disk"></i>
+                                                            </button>
+                                                            <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, dog.id)}>
+                                                                <i className="fa-solid fa-trash-can"></i>
+                                                            </button>
+                                                            <h5>Registered name: </h5>
+                                                            <input 
+                                                                className="form-control mb-2"
+                                                                defaultValue={dog.registered_name}
+                                                                name="registered_name"
+                                                                type="text"
+                                                                required
+                                                            />
+                                                            <h5>Call name: </h5>
+                                                            <input 
+                                                                className="form-control mb-2"
+                                                                defaultValue={dog.call_name}
+                                                                name="call_name"
+                                                                type="text"
+                                                                required
+                                                            />
+                                                            <h5>Owner: </h5>
+                                                            <input 
+                                                                className="form-control mb-2"
+                                                                defaultValue={dog.owner}
+                                                                name="owner"
+                                                                type="text"
+                                                                required
+                                                            />
+                                                            <h5>Titles: </h5>
+                                                            <input 
+                                                                className="form-control mb-2"
+                                                                defaultValue={dog.titles}
+                                                                name="titles"
+                                                                type="text"
+                                                                required
+                                                            />
+                                                            <h5>About:</h5>
+                                                            <textarea 
+                                                                className="form-control mb-2"
+                                                                defaultValue={dog.about}
+                                                                name="about"
+                                                                type="text"
+                                                                required
+                                                            />
+                                                            <p>
+                                                                Year and month:
+                                                                <input 
+                                                                    className="form-control" 
+                                                                    type="month" 
+                                                                    defaultValue={`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`} 
+                                                                    name="year_month"
+                                                                    required
+                                                                />
+                                                            </p>
+                                                        </div>
+                                                        <div className="col-md-6 d-flex align-items-center justify-content-center">
+                                                            <p>Image: <input id="image-select" type="file" name="image" accept="image/*" /></p>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            {dog.current ? (
+                                                                <button className="btn btn-warning me-2 mb-2 disabled-button" title="Current Dog of the Month" onClick={(e) => e.preventDefault()}>
+                                                                    <i className="fa-solid fa-star"></i>
+                                                                </button>
+                                                            ) : (
+                                                                <button className="btn btn-success me-2 mb-2" onClick={(e) => this.makeCurrent(e, dog.id)} title="Make Current">
+                                                                    <i className="fa-solid fa-check"></i>
+                                                                </button>
+                                                            )}
+                                                            <button className="btn btn-primary me-2 mb-2" onClick={(e) => this.edit(e, dog.id)} title="Edit">
+                                                                <i className="fa-solid fa-pencil"></i>
+                                                            </button>
+                                                            <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, dog.id)}>
+                                                                <i className="fa-solid fa-trash-can"></i>
+                                                            </button>
+                                                            <h5>Registered name: {dog.registered_name}</h5>
+                                                            <h5>Call name: {dog.call_name}</h5>
+                                                            <h5>Owner: {dog.owner}</h5>
+                                                            <h5>Titles: {dog.titles}</h5>
+                                                            <h5>About:</h5>
+                                                            <h5>{dog.about}</h5>
+                                                            <h5>Year and month: {new Date(`${dog.year_month}-01T00:00:00`).toLocaleString('default', { month: 'short', year: 'numeric' })}</h5>
+                                                        </div>
+                                                        <div className="col-md-6 text-end">
+                                                            <img className="admin-dog-of-the-month-image" src={dog.image_url}></img>
+                                                        </div>
+                                                    </div>
+                                                )}
                                             </div>
-                                        ) : (
-                                            <div className="row">
-                                                <div className="col-md-6">
-                                                    {dog.current ? (
-                                                        <button className="btn btn-warning me-2 mb-2 disabled-button" title="Current Dog of the Month" onClick={(e) => e.preventDefault()}>
-                                                            <i className="fa-solid fa-star"></i>
-                                                        </button>
-                                                    ) : (
-                                                        <button className="btn btn-success me-2 mb-2" onClick={(e) => this.makeCurrent(e, dog.id)} title="Make Current">
-                                                            <i className="fa-solid fa-check"></i>
-                                                        </button>
-                                                    )}
-                                                    <button className="btn btn-primary me-2 mb-2" onClick={(e) => this.edit(e, dog.id)} title="Edit">
-                                                        <i className="fa-solid fa-pencil"></i>
-                                                    </button>
-                                                    <button className="btn btn-danger mb-2" title="Delete" onClick={(e) => this.delete(e, dog.id)}>
-                                                        <i className="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                    <h5>Registered name: {dog.registered_name}</h5>
-                                                    <h5>Call name: {dog.call_name}</h5>
-                                                    <h5>Owner: {dog.owner}</h5>
-                                                    <h5>Titles: {dog.titles}</h5>
-                                                    <h5>About:</h5>
-                                                    <h5>{dog.about}</h5>
-                                                    <h5>Year and month: {new Date(`${dog.year_month}-01T00:00:00`).toLocaleString('default', { month: 'short', year: 'numeric' })}</h5>
-                                                </div>
-                                                <div className="col-md-6 text-end">
-                                                    <img className="admin-dog-of-the-month-image" src={dog.image_url}></img>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </form>
-                            )
-                        })}
-                    </>
+                                        </form>
+                                    )
+                                })}
+                            </>
+                        )}
+                    </div>
                 )}
-
-            </div>
+            </>
         );
     }
 }

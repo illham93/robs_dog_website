@@ -1,10 +1,8 @@
 import React from "react";
 import Layout from "../../layout";
-import { safeCredentials, handleErrors } from "../../utils/fetchHelper";
+import { handleErrors } from "../../utils/fetchHelper";
 import EditAnnouncements from "./editAnnouncements";
-
 import './adminHome.scss';
-import EditDogOfTheMonth from "./editDogOfTheMonth";
 
 class AdminHome extends React.Component {
 
