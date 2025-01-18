@@ -49,7 +49,7 @@ class Sponsors extends React.Component {
                                 return (
                                     <div key={category} className="rounded-grey-background mt-4 text-center">
                                         <h3 className="text-underline">{category}</h3>
-                                        <div className="row">
+                                        <div className="row justify-content-center">
                                             {categorySponsors.map(sponsor => (
                                                 <div className="col-12 col-md-6 col-lg-4">
                                                     <div key={sponsor.id} className="d-inline-block text-center m-2">
