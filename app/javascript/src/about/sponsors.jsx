@@ -51,10 +51,10 @@ class Sponsors extends React.Component {
                                         <h3 className="text-underline">{category}</h3>
                                         <div className="row">
                                             {categorySponsors.map(sponsor => (
-                                                <div className="col-12 col-md-4">
+                                                <div className="col-12 col-sm-6 col-md-4">
                                                     <div key={sponsor.id} className="d-inline-block text-center m-2">
                                                         <a href={sponsor.url} className="text-decoration-none text-white">
-                                                            <img className="sponsor-image mb-2" src={sponsor.image_url} alt={sponsor.title} />
+                                                            <img className="sponsor-image img-fluid mb-2" src={sponsor.image_url} alt={sponsor.title} />
                                                             <h5>{sponsor.title}</h5>
                                                         </a>
                                                     </div>
