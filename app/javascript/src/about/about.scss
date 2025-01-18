@@ -1,0 +1,21 @@
+.sponsor-container {
+    height: 100%; /* Ensure full height of the column */
+    display: flex;
+    flex-direction: column;
+}
+
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Allow it to grow and take up remaining space */
+}
+
+.sponsor-title {
+    margin-top: auto; /* Push the title to the bottom */
+    padding-top: 10px; /* Optional spacing above the title */
+}
+
+.sponsor-image {
+    object-fit: contain; /* Maintain aspect ratio and fit within bounds */
+}

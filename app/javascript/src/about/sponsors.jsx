@@ -51,14 +51,16 @@ class Sponsors extends React.Component {
                                         <h3 className="text-underline">{category}</h3>
                                         <div className="row justify-content-center">
                                             {categorySponsors.map(sponsor => (
-                                                <div className="col-12 col-md-6 col-lg-4" key={sponsor.id}>
-                                                <div className="d-flex flex-column justify-content-between align-items-center text-center m-2 h-100">
-                                                    <a href={sponsor.url} className="text-decoration-none text-white w-100" target="_blank" rel="noopener noreferrer">
-                                                        <img className="sponsor-image img-fluid mb-2" src={sponsor.image_url} alt={sponsor.title} />
-                                                        <h5 className="mt-auto">{sponsor.title}</h5>
-                                                    </a>
+                                                <div className="col-12 col-md-6 col-lg-4">
+                                                    <div key={sponsor.id} className="sponsor-container text-center m-2 d-flex flex-column align-items-center">
+                                                        <a href={sponsor.url} className="text-decoration-none text-white w-100 h-100 d-flex flex-column">
+                                                            <div className="image-wrapper d-flex justify-content-center align-items-center flex-grow-1">
+                                                                <img className="sponsor-image img-fluid" src={sponsor.image_url} alt={sponsor.title} />
+                                                            </div>
+                                                            <h5 className="sponsor-title mt-auto">{sponsor.title}</h5>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             ))}
                                         </div>
                                     </div>
