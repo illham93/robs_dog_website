@@ -53,7 +53,7 @@ class Sponsors extends React.Component {
                                             {categorySponsors.map(sponsor => (
                                                 <div className="col-12 col-md-6 col-lg-4">
                                                     <div key={sponsor.id} className="sponsor-container text-center m-2 d-flex flex-column align-items-center">
-                                                        <a href={sponsor.url} className="text-decoration-none text-white w-100 h-100 d-flex flex-column">
+                                                        <a href={sponsor.url} className="text-decoration-none text-white w-100 h-100 d-flex flex-column" target="blank">
                                                             <div className="image-wrapper d-flex justify-content-center align-items-center flex-grow-1">
                                                                 <img className="sponsor-image img-fluid" src={sponsor.image_url} alt={sponsor.title} />
                                                             </div>
