@@ -49,14 +49,18 @@ class Sponsors extends React.Component {
                                 return (
                                     <div key={category} className="rounded-grey-background mt-4 text-center">
                                         <h3 className="text-underline">{category}</h3>
-                                        {categorySponsors.map(sponsor => (
-                                            <div key={sponsor.id} className="d-inline-block text-center m-2">
-                                                <a href={sponsor.url} className="text-decoration-none text-white">
-                                                    <img className="sponsor-image mb-2" src={sponsor.image_url} alt={sponsor.title} />
-                                                    <h5>{sponsor.title}</h5>
-                                                </a>
-                                            </div>
-                                        ))}
+                                        <div className="row">
+                                            {categorySponsors.map(sponsor => (
+                                                <div className="col-12 col-md-4">
+                                                    <div key={sponsor.id} className="d-inline-block text-center m-2">
+                                                        <a href={sponsor.url} className="text-decoration-none text-white">
+                                                            <img className="sponsor-image mb-2" src={sponsor.image_url} alt={sponsor.title} />
+                                                            <h5>{sponsor.title}</h5>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 );
                             })}
