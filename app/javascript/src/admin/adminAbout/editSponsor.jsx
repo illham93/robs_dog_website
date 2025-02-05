@@ -126,6 +126,7 @@ class EditSponsor extends React.Component {
                                 {sponsors.map(sponsor => (
                                         <div key={sponsor.id} className="m-3">
                                             {editId === sponsor.id ? (
+                                                // Editing version
                                                 <form onSubmit={(e) => this.save(e, sponsor.id)} key={sponsor.id}>
                                                     <div className="row">
                                                         <div className="col-4">
@@ -163,6 +164,11 @@ class EditSponsor extends React.Component {
                                                                 </select>
                                                             </div>
 
+                                                            <div className="d-flex align-items-center mb-2 w-100">
+                                                                <h5 className="me-2 mb-0 text-nowrap">Expiry Date:</h5>
+                                                                <input className="form-control" name="expiry_date" type="date" defaultValue={sponsor.expiry_date} />
+                                                            </div>
+
                                                             <p>Image: 
                                                                 <input id="image-select" className="ms-1" type="file" name="image" accept="image/*" />
                                                             </p>
@@ -170,6 +176,7 @@ class EditSponsor extends React.Component {
                                                     </div>
                                                 </form>
                                             ) : (
+                                                // Non-editing version
                                                 <div className="row">
                                                     <div className="col-4">
                                                         <img className="sponsor-image mb-2" src={sponsor.image_url} alt={sponsor.title} />
@@ -186,6 +193,9 @@ class EditSponsor extends React.Component {
                                                         <h5>Title: {sponsor.title}</h5>
                                                         <h5>URL: {sponsor.url}</h5>
                                                         <h5>Category: {sponsor.category}</h5>
+                                                        <h5>Expiry date:&nbsp;
+                                                            {sponsor.expiry_date ?? 'None'}
+                                                        </h5>
                                                     </div>
                                                 </div>
                                             )}
