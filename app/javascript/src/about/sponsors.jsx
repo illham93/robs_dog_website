@@ -32,6 +32,16 @@ class Sponsors extends React.Component {
         // Sort the sponsors by category
         const categoryOrder = ["Hall of Fame", "Grand Hunting Retriever Champion", "Hunting Retriever Champion", "Hunting Retriever", "Started Hunting Retriever"];
 
+        // Filter sponsors to exclude those with an expiry date in the past
+        const nonExpiredSponsors = sponsors.filter(sponsor => {
+            if (!sponsor.expiry_date) {
+                return true; // Include sponsors with no expiry date
+            }
+            const expiryDate = new Date(sponsor.expiry_date);
+            const today = new Date();
+            return expiryDate >= today; // Include sponsors that aren't expired yet
+        });
+
         return (
             <div>
                 <h3 className="text-center mb-4">Thank you to our generous sponsors!</h3>
@@ -44,7 +54,7 @@ class Sponsors extends React.Component {
                     <>
                         <div>
                             {categoryOrder.map(category => {
-                                const categorySponsors = sponsors.filter(sponsor => sponsor.category === category);
+                                const categorySponsors = nonExpiredSponsors.filter(sponsor => sponsor.category === category);
                                 if (categorySponsors.length === 0) return null;
                                 return (
                                     <div key={category} className="rounded-grey-background mt-4 text-center">
