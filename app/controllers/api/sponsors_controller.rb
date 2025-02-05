@@ -64,7 +64,7 @@ module Api
     private
 
     def sponsor_params
-      params.permit(:title, :url, :category, :image)
+      params.permit(:title, :url, :category, :image, :expiry_date)
     end
   end
 end

@@ -102,6 +102,9 @@ class AddSponsor extends React.Component {
                                                 <option value="Hall of Fame">Hall of Fame</option>
                                             </select>
                                         </p>
+                                        <p>Expiry Date: (optional)
+                                            <input className="form-control" type="date" name="expiry_date"/>
+                                        </p>
                                     </form>
                                 </div>
                             </div>
